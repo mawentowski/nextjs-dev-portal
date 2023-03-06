@@ -1,18 +1,11 @@
-import Layout from '../../components/layout'
-import PageNav from './PageNav'
+import Layout from '../../components/layout';
 
 export default function Blog() {
-  return (
-    <>
-    <Layout>
-        <PageNav/>
-        <div>This is the blog page.</div>
-    </Layout>
-    </>
-  )
+    return (
+        <>
+            <Layout>
+                <div>This is the blog page.</div>
+            </Layout>
+        </>
+    );
 }
-
-
-
-
-

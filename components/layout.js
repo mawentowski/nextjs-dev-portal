@@ -1,10 +1,10 @@
-import SiteHeader from './SiteHeader'
+import SiteHeader from './SiteHeader';
 
 export default function Layout({ children, home }) {
-  return (
-    <>
-    <SiteHeader/>
-    <main>{children}</main>
-    </>
-  );
+    return (
+        <>
+            <SiteHeader />
+            <main>{children}</main>
+        </>
+    );
 }
