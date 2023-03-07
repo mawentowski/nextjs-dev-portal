@@ -4,7 +4,7 @@ export default function Layout({ children, home }) {
     return (
         <>
             <SiteHeader />
-            <main>{children}</main>
+            {children}
         </>
     );
 }

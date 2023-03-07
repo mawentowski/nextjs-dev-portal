@@ -3,7 +3,7 @@
 function PageNav(props) {
     return (
         <nav className="subnav">
-            <div className="subnav-container">
+            <div className="subnav-container flex mx-auto px-3 w-full max-w-screen-xl">
                 <button className="plain">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"

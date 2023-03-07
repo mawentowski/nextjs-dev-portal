@@ -1,10 +1,11 @@
-import Head from 'next/head';
-import Image from 'next/image';
-import { Inter } from 'next/font/google';
-import styles from 'docs/styles/Home.module.css';
+// import Head from 'next/head';
+// import Image from 'next/image';
+// import { Inter } from 'next/font/google';
+// import styles from 'docs/styles/Home.module.css';
 // import SiteHeader from '../../components/SiteHeader'
 // import MainBody from '../../components/MainBody'
 import Layout from '../../components/layout';
+import MainBody from '../../components/MainBody';
 
 export default function Home() {
     return (
@@ -120,10 +121,11 @@ export default function Home() {
         //     </div>
         //   </main>
         // </>
-        <>
-            <Layout>
-                <div>This is the home page</div>
-            </Layout>
-        </>
+
+        <Layout>
+            <MainBody>
+                <div>This is the home page.</div>
+            </MainBody>
+        </Layout>
     );
 }
