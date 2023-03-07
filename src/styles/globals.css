@@ -36,7 +36,8 @@ ol li {
 /* ********************************/
 
 a {
-    color: #8685ef;
+    /* blue dark -- need to do a variable */
+    color: #3b82f6;
     text-decoration: none;
 }
 
