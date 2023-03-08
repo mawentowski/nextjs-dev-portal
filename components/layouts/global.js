@@ -1,6 +1,6 @@
-import SiteHeader from './SiteHeader';
+import SiteHeader from '../SiteHeader';
 
-export default function Layout({ children, home }) {
+export default function Layout({ children }) {
     return (
         <>
             <SiteHeader />
