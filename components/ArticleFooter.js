@@ -1,7 +1,8 @@
-function ArticleFooter(props) {
+function ArticleFooter({ children }) {
     return (
         <div id="#article-footer">
             <h2>Footer</h2>
+            {children}
             <p>
                 dolorum officia laborum quaerat quos facilis aperiam ad soluta
                 commodi modi assumenda alias similique porro, nam vel sit, omnis

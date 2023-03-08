@@ -1,7 +1,7 @@
 // import './PageNav.css';
-import ButtonPlain from './ui/ButtonPlain';
+import ButtonPlain from './ui/buttonplain';
 
-function PageNav(props) {
+export default function PageNav() {
     return (
         <nav className="lg:hidden py-3 px-0 flex flex-nowrap items-center z-20 sticky top-0 w-full border-b border-b-graymedium">
             <div className="flex mx-auto px-6 w-full max-w-screen-xl items-center">
@@ -24,9 +24,4 @@ function PageNav(props) {
             </div>
         </nav>
     );
-}
-
-export default PageNav;
-{
-    /* <header className="items-center bg-white flex flex-col flex-nowrap sticky top-0 z-30 border-gray_light border-b border-b-graymedium"> */
 }

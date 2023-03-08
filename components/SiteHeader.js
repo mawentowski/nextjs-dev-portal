@@ -2,7 +2,7 @@
 // import './media-queries.css';
 // import VersionSelector from './VersionSelector';
 import Link from 'next/link';
-import ButtonPlain from './ui/ButtonPlain';
+import ButtonPlain from './ui/buttonplain';
 
 function SiteHeader(props) {
     return (
@@ -82,7 +82,7 @@ function SiteHeader(props) {
                 <div class="lg:flex item-center ml-auto">
                     <nav class="hidden lg:flex items-center">
                         <Link
-                            href="/docs"
+                            href="/articles/intro"
                             className="bg-transparent border-0 text-sm my-0 mr-4 text-textprimary hover:text-bluedark font-semibold"
                         >
                             Documentation

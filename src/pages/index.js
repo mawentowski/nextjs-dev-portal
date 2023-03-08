@@ -4,16 +4,14 @@
 // import styles from 'docs/styles/Home.module.css';
 // import SiteHeader from '../../components/SiteHeader'
 // import MainBody from '../../components/MainBody'
-import MainBody from '../../components/MainBody';
-import Global from '../../components/layouts/global';
+// import MainBody from '../../components/MainBody';
+// import Global from '../../components/layouts/layout';
+import Layout from '../../components/layout';
 
 export default function Home() {
     return (
-        <Global>
-            {/* issue with MainBody - hyrdation */}
-            {/* <MainBody> */}
+        <Layout>
             <div>This is the home page.</div>
-            {/* </MainBody> */}
-        </Global>
+        </Layout>
     );
 }

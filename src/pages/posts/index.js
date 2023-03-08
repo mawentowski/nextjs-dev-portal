@@ -1,7 +1,8 @@
-import Blog from '../../../components/layouts/Blog';
+// import Blog from '../../../components/layouts/Blog';
 import { getSortedPostsData } from '../../../lib/posts';
 import Link from 'next/link';
 import Date from '../../../components/dates';
+import Layout from '../../../components/layout';
 
 export async function getStaticProps() {
     const allPostsData = getSortedPostsData();
@@ -14,7 +15,7 @@ export async function getStaticProps() {
 
 export default function BlogsLandingPage({ allPostsData }) {
     return (
-        <Blog>
+        <Layout>
             <h1>Welcome to the Blog Landing Page</h1>
             <ul>
                 {allPostsData.map(({ id, date, title }) => (
@@ -27,6 +28,6 @@ export default function BlogsLandingPage({ allPostsData }) {
                     </li>
                 ))}
             </ul>
-        </Blog>
+        </Layout>
     );
 }

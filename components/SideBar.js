@@ -1,5 +1,5 @@
-import SideBarHeader from './SideBarHeader';
-import SideBarPageNav from './SideBarPageNav';
+import SideBarHeader from './sidebarheader';
+import SideBarPageNav from './sidebarpagenav';
 
 function SideBar(props) {
     return (

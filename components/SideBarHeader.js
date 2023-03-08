@@ -1,4 +1,4 @@
-function SideBarHeader(props) {
+function SideBarHeader() {
     return (
         <div className="sidebar-header">
             <div className="sidebar-header-blocker-top"></div>

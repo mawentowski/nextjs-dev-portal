@@ -1,5 +1,5 @@
-import CodeBlock from './ui/CodeBlock';
-import TabbedCodeSamples from './ui/TabbedCodeSamples';
+import CodeBlock from './ui/codeblock';
+import TabbedCodeSamples from './ui/tabbedcodesamples';
 
 function ArticleContent(props) {
     return (

@@ -2,10 +2,11 @@ import { getAllPostIds, getPostData } from '../../../lib/posts';
 import Head from 'next/head';
 import Date from '../../../components/dates';
 import Link from 'next/link';
+import Layout from '../../../components/layout';
 
 export default function Post({ postData }) {
     return (
-        <>
+        <Layout>
             <Head>
                 <title>{postData.title}</title>
             </Head>
@@ -18,7 +19,7 @@ export default function Post({ postData }) {
             <div dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />
             <br />
             <Link href="/posts">Go back to Blog home page</Link>
-        </>
+        </Layout>
     );
 }
 

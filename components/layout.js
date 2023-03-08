@@ -1,4 +1,4 @@
-import SiteHeader from '../SiteHeader';
+import SiteHeader from './siteheader';
 
 export default function Layout({ children }) {
     return (
