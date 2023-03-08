@@ -1,5 +1,7 @@
 import Blog from '../../../components/layouts/Blog';
 import { getSortedPostsData } from '../../../lib/posts';
+import Link from 'next/link';
+import Date from '../../../components/dates';
 
 export async function getStaticProps() {
     const allPostsData = getSortedPostsData();
@@ -17,11 +19,11 @@ export default function BlogsLandingPage({ allPostsData }) {
             <ul>
                 {allPostsData.map(({ id, date, title }) => (
                     <li key={id}>
-                        {title}
+                        <Link href={`/posts/${id}`}>{title}</Link>
                         <br />
-                        {id}
-                        <br />
-                        {date}
+                        <small>
+                            <Date dateString={date} />
+                        </small>
                     </li>
                 ))}
             </ul>

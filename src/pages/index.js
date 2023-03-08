@@ -10,6 +10,7 @@ import Global from '../../components/layouts/global';
 export default function Home() {
     return (
         <Global>
+            {/* issue with MainBody - hyrdation */}
             {/* <MainBody> */}
             <div>This is the home page.</div>
             {/* </MainBody> */}
