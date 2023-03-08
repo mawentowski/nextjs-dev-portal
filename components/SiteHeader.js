@@ -2,11 +2,12 @@
 // import './media-queries.css';
 // import VersionSelector from './VersionSelector';
 import Link from 'next/link';
+import ButtonPlain from './ui/ButtonPlain';
 
 function SiteHeader(props) {
     return (
         <header className="items-center bg-white flex flex-col flex-nowrap sticky top-0 z-30 border-gray_light border-b border-b-graymedium">
-            <nav className="flex mx-auto py-3 px-3 w-full max-w-screen-xl ">
+            <nav className="flex mx-auto py-3 px-6 w-full max-w-screen-xl ">
                 <Link href="/" className="p-0 flex items-center text-xl">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -59,7 +60,7 @@ function SiteHeader(props) {
                 </div>
                 <Link
                     href="/blog/blog"
-                    className="rounded-2xl hidden ml-0.5 border py-1 px-2 lg:flex bg-bluelight hover:bg-bluemedium"
+                    className="rounded-2xl border-0 hidden ml-0.5 border py-1 px-2 lg:flex bg-bluelight hover:bg-bluemedium"
                 >
                     <span className="text-sm font-normal text-bluedark">
                         sdfdsit amet consectetur. Lorem ipsum
@@ -94,7 +95,7 @@ function SiteHeader(props) {
                         </Link>
                     </nav>
                     <nav class="hidden lg:flex pl-8 border-l border-l-graymedium">
-                        <button class="flex bg-transparent border-0 p-0">
+                        <ButtonPlain className="flex">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 viewBox="0 0 512 512"
@@ -102,7 +103,8 @@ function SiteHeader(props) {
                             >
                                 <path d="M375.7 19.7c-1.5-8-6.9-14.7-14.4-17.8s-16.1-2.2-22.8 2.4L256 61.1 173.5 4.2c-6.7-4.6-15.3-5.5-22.8-2.4s-12.9 9.8-14.4 17.8l-18.1 98.5L19.7 136.3c-8 1.5-14.7 6.9-17.8 14.4s-2.2 16.1 2.4 22.8L61.1 256 4.2 338.5c-4.6 6.7-5.5 15.3-2.4 22.8s9.8 13 17.8 14.4l98.5 18.1 18.1 98.5c1.5 8 6.9 14.7 14.4 17.8s16.1 2.2 22.8-2.4L256 450.9l82.5 56.9c6.7 4.6 15.3 5.5 22.8 2.4s12.9-9.8 14.4-17.8l18.1-98.5 98.5-18.1c8-1.5 14.7-6.9 17.8-14.4s2.2-16.1-2.4-22.8L450.9 256l56.9-82.5c4.6-6.7 5.5-15.3 2.4-22.8s-9.8-12.9-17.8-14.4l-98.5-18.1L375.7 19.7zM269.6 110l65.6-45.2 14.4 78.3c1.8 9.8 9.5 17.5 19.3 19.3l78.3 14.4L402 242.4c-5.7 8.2-5.7 19 0 27.2l45.2 65.6-78.3 14.4c-9.8 1.8-17.5 9.5-19.3 19.3l-14.4 78.3L269.6 402c-8.2-5.7-19-5.7-27.2 0l-65.6 45.2-14.4-78.3c-1.8-9.8-9.5-17.5-19.3-19.3L64.8 335.2 110 269.6c5.7-8.2 5.7-19 0-27.2L64.8 176.8l78.3-14.4c9.8-1.8 17.5-9.5 19.3-19.3l14.4-78.3L242.4 110c8.2 5.7 19 5.7 27.2 0zM256 368a112 112 0 1 0 0-224 112 112 0 1 0 0 224zM192 256a64 64 0 1 1 128 0 64 64 0 1 1 -128 0z"></path>
                             </svg>
-                        </button>
+                        </ButtonPlain>
+
                         <Link
                             href="https://github.com/"
                             className="flex p-0"
@@ -119,8 +121,8 @@ function SiteHeader(props) {
                     </nav>
                 </div>
 
-                <div class="lg:hidden flex ml-auto">
-                    <button class="bg-transparent border-0 p-0 lg:hidden flex">
+                <div class="lg:hidden flex ml-auto items-center">
+                    <ButtonPlain className="lg:hidden flex">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 512 512"
@@ -128,8 +130,8 @@ function SiteHeader(props) {
                         >
                             <path d="M500.3 443.7l-119.7-119.7c27.22-40.41 40.65-90.9 33.46-144.7C401.8 87.79 326.8 13.32 235.2 1.723C99.01-15.51-15.51 99.01 1.724 235.2c11.6 91.64 86.08 166.7 177.6 178.9c53.8 7.189 104.3-6.236 144.7-33.46l119.7 119.7c15.62 15.62 40.95 15.62 56.57 0C515.9 484.7 515.9 459.3 500.3 443.7zM79.1 208c0-70.58 57.42-128 128-128s128 57.42 128 128c0 70.58-57.42 128-128 128S79.1 278.6 79.1 208z"></path>
                         </svg>
-                    </button>
-                    <button class="bg-transparent border-0 p-0 lg:hidden flex">
+                    </ButtonPlain>
+                    <ButtonPlain className="lg:hidden flex">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 128 512"
@@ -137,7 +139,7 @@ function SiteHeader(props) {
                         >
                             <path d="M56 472a56 56 0 1 1 0-112 56 56 0 1 1 0 112zm0-160a56 56 0 1 1 0-112 56 56 0 1 1 0 112zM0 96a56 56 0 1 1 112 0A56 56 0 1 1 0 96z"></path>
                         </svg>
-                    </button>
+                    </ButtonPlain>
                 </div>
             </nav>
         </header>

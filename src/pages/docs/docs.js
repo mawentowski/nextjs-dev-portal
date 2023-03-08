@@ -7,7 +7,7 @@ export default function Docs() {
         <Layout>
             <PageNav />
             <MainBody>
-                <div>This is the docs page.</div>
+                <div className="font-extralight">This is the docs page.</div>
             </MainBody>
         </Layout>
     );
