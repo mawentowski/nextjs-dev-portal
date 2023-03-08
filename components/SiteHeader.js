@@ -82,13 +82,13 @@ function SiteHeader(props) {
                 <div class="lg:flex item-center ml-auto">
                     <nav class="hidden lg:flex items-center">
                         <Link
-                            href="/docs/docs"
+                            href="/docs"
                             className="bg-transparent border-0 text-sm my-0 mr-4 text-textprimary hover:text-bluedark font-semibold"
                         >
                             Documentation
                         </Link>
                         <Link
-                            href="/blog/blog"
+                            href="/posts"
                             className="bg-transparent border-0 text-sm my-0 ml-4 mr-8 text-textprimary hover:text-bluedark font-semibold"
                         >
                             Blog

@@ -8,3 +8,15 @@ export default function Layout({ children }) {
         </>
     );
 }
+
+// {!home && (
+//     <div className={styles.backToHome}>
+//       <Link href="/">← Back to home</Link>
+//     </div>
+//   )}
+
+// {home  (
+//     <div className={styles.backToHome}>
+//       <Link href="/">← Back to home</Link>
+//     </div>
+//   )}

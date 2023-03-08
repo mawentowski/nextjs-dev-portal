@@ -6,7 +6,8 @@ export default function Doc({ children }) {
     return (
         <Global>
             <PageNav />
-            <MainBody>{children}</MainBody>
+            {/* <MainBody>{children}</MainBody> */}
+            {children}
         </Global>
     );
 }

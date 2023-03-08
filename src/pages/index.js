@@ -10,9 +10,9 @@ import Global from '../../components/layouts/global';
 export default function Home() {
     return (
         <Global>
-            <MainBody>
-                <div>This is the home page.</div>
-            </MainBody>
+            {/* <MainBody> */}
+            <div>This is the home page.</div>
+            {/* </MainBody> */}
         </Global>
     );
 }
