@@ -1,8 +1,8 @@
 // import Blog from '../../../components/layouts/Blog';
-import { getSortedPostsData } from '../../../lib/posts';
-import Link from 'next/link';
 import Date from '../../../components/dates';
 import Layout from '../../../components/layout';
+import Link from 'next/link';
+import { getSortedPostsData } from '../../../lib/posts';
 
 export async function getStaticProps() {
     const allPostsData = getSortedPostsData();

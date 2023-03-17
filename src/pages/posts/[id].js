@@ -1,8 +1,8 @@
-import { getAllPostIds, getPostData } from '../../../lib/posts';
-import Head from 'next/head';
 import Date from '../../../components/dates';
-import Link from 'next/link';
+import Head from 'next/head';
 import Layout from '../../../components/layout';
+import Link from 'next/link';
+import { getAllPostIds, getPostData } from '../../../lib/posts';
 
 export default function Post({ postData }) {
     return (

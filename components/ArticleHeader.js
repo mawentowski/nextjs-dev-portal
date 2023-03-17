@@ -1,12 +1,12 @@
-function ArticleHeader(props) {
+function ArticleHeader() {
     return (
         <nav id="#article-header">
-            <div class="article-section">
-                <h5>Current Article</h5>
+            <div class="font-semibold mb-2 text-sm">
+                <h5 className="text-bluedark">Current Article</h5>
             </div>
-            <div class="article-intro">
+            <div>
                 <h1>BD Intro</h1>
-                <p className="lg-type">
+                <p className="mb-0 mt-2 text-lg">
                     Lorem ipsum dolor sit amet consectetur adipisicing elit.
                     Quae eligendi assumenda autem cupiditate esse suscipit
                     dolorem in incidunt voluptates magni.

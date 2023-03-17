@@ -23,6 +23,7 @@ p {
     line-height: 28px;
     margin-bottom: 1.25em;
     margin-top: 0.5rem;
+    font-weight: 300;
 }
 
 p,
@@ -72,11 +73,12 @@ h4,
 h5 {
     color: #363636;
 }
+h1,
 h2,
 h3,
 h4,
 h5 {
-    font-weight: 600;
+    font-weight: 400;
 }
 
 h1 {
@@ -387,6 +389,97 @@ p.caption {
         width: 262px;
     }
 }
+
+/* ********************************/
+/* Cant use tailwind  */
+/* ********************************/
+
+@media (min-width: 768px) {
+    aside#sidebar {
+        grid-area: sidebar;
+    }
+}
+
+@media (min-width: 1200px) {
+    #article-toc {
+        height: calc(100vh - 3.6rem);
+    }
+}
+
+/* @media (max-width: 767px) {
+    #main-container {
+        grid-template-areas: 'main';
+    }
+} */
+
+#main-container {
+    grid-template-areas: 'main';
+    /* grid-template-columns: 1fr; */
+}
+
+@media (min-width: 768px) {
+    #main-container {
+        grid-template-areas: 'sidebar main';
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 1199px) {
+    #article {
+        grid-template-areas:
+            'intro'
+            'toc'
+            'content'
+            'footer';
+        padding-right: var(--bs-gutter-x, 0.75rem);
+        padding-left: var(--bs-gutter-x, 0.75rem);
+        margin-right: auto;
+        margin-left: auto;
+    }
+}
+@media (min-width: 1200px) {
+    #article {
+        grid-template-areas:
+            'intro toc'
+            'content toc'
+            'footer toc';
+        grid-template-columns: 3fr 1.5fr;
+    }
+}
+
+main.article {
+    grid-area: main;
+    gap: inherit;
+}
+
+#article-toc {
+    grid-area: toc;
+}
+
+#article-header {
+    grid-area: intro;
+}
+
+#sidebar-links-container {
+    height: calc(100vh - 3.6rem);
+}
+
+/* Need to add white as color */
+
+#search-append {
+    border-color: #e8ecf0;
+    background-color: rgb(247 250 252);
+}
+/* Need to look up these styles */
+
+/* .bg-gradient-to-b {
+    background-image: linear-gradient(to bottom, var(--tw-gradient-stops));
+}
+.from-white {
+    --tw-gradient-from: #fff;
+    --tw-gradient-to: hsla(0, 0%, 100%, 0);
+    --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+} */
 
 /* ********************************/
 /* RESETS */

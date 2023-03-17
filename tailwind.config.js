@@ -20,6 +20,7 @@ module.exports = {
         },
         colors: {
             transparent: 'transparent',
+            white: '#FFFFFF',
             textprimary: '#334155',
             textaccent: '#0F172A',
             graylight: '#F3F4F6',
