@@ -15,11 +15,17 @@ export default function Article({ articleData }) {
             <PageNav />
             <main
                 id="main-container"
-                className="w-full grid gap-6 mx-auto max-w-screen-xl"
+                className="w-full grid gap-6 mx-auto max-w-screen-xl px-6 md:px-0"
             >
+                {/* 
+padding-right: var(--bs-gutter-x, 0.75rem);
+        padding-left: var(--bs-gutter-x, 0.75rem);
+        margin-right: auto;
+        margin-left: auto; */}
+
                 <SideBar />
 
-                <main id="article" className="grid order-1">
+                <main id="article" className="grid order-1 md:pr-6 xl:pr-0">
                     {/* Need to pass Id of header to generate header section */}
                     {/* You can add article date and so forth */}
                     <ArticleHeader />

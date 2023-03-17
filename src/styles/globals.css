@@ -431,8 +431,7 @@ p.caption {
             'toc'
             'content'
             'footer';
-        padding-right: var(--bs-gutter-x, 0.75rem);
-        padding-left: var(--bs-gutter-x, 0.75rem);
+
         margin-right: auto;
         margin-left: auto;
     }
@@ -462,6 +461,10 @@ main.article {
 
 #sidebar-links-container {
     height: calc(100vh - 3.6rem);
+}
+
+#sidebar-links-container li {
+    left: -2px;
 }
 
 /* Need to add white as color */

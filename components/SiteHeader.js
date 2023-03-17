@@ -18,7 +18,7 @@ function SiteHeader(props) {
                         <path d="M273.8 45.8l73.7 28L271.2 103 194.8 73.7l73.7-28c1.7-.7 3.6-.7 5.3 0zM128.1 87.1V192.6c-1.2 .4-2.4 .8-3.6 1.2L34.1 228.1c-20.5 7.8-34 27.4-34 49.3V389.5c0 20.9 12.4 39.8 31.5 48.3L122 477.5c13.5 5.9 28.9 5.9 42.4 0l106.8-46.9L378 477.5c13.5 5.9 28.9 5.9 42.4 0l90.4-39.7c19.1-8.4 31.5-27.3 31.5-48.3V277.4c0-21.9-13.5-41.5-34-49.3l-90.4-34.3c-1.2-.5-2.4-.9-3.6-1.2V87.1c0-21.9-13.5-41.5-34-49.3L289.9 3.5c-12-4.6-25.3-4.6-37.4 0L162.1 37.8c-20.5 7.8-34 27.4-34 49.3zM369.1 198.2l-77.5 29.4v-84l77.5-29.7v84.3zM145.8 236.1l73.7 28-76.4 29.3L66.8 264.1l73.7-28c1.7-.7 3.6-.7 5.3 0zm17.7 192.4V333.9l77.5-29.7v90.2l-77.5 34.1zm233-192.4c1.7-.7 3.6-.7 5.3 0l73.7 28-76.4 29.3-76.4-29.3 73.7-28zm96.1 160.3l-73 32.1V333.9l77.5-29.7v85.3c0 3-1.8 5.7-4.5 6.9z" />
                     </svg>
 
-                    <span className="font-medium hidden ml-0.5 sm:block text-blueextradark">
+                    <span className="font-bold hidden ml-0.5 sm:block text-blueextradark">
                         IniTech
                     </span>
                 </Link>
@@ -83,13 +83,13 @@ function SiteHeader(props) {
                     <nav class="hidden items-center lg:flex">
                         <Link
                             href="/articles/intro"
-                            className="bg-transparent border-0 font-medium hover:text-bluedark mr-4 my-0 text-sm text-textprimary"
+                            className="bg-transparent border-0  font-semibold hover:text-bluedark mr-4 my-0 text-sm text-textprimary"
                         >
                             Documentation
                         </Link>
                         <Link
                             href="/posts"
-                            className="bg-transparent border-0 font-medium hover:text-bluedark ml-4 mr-8 my-0 text-sm text-textprimary"
+                            className="bg-transparent border-0 font-semibold  hover:text-bluedark ml-4 mr-8 my-0 text-sm text-textprimary"
                         >
                             Blog
                         </Link>
@@ -126,7 +126,7 @@ function SiteHeader(props) {
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 512 512"
-                            className="fill-graydark h-5 opacity-70 w-8"
+                            className="fill-graydark h-5 opacity-50 w-8"
                         >
                             <path d="M500.3 443.7l-119.7-119.7c27.22-40.41 40.65-90.9 33.46-144.7C401.8 87.79 326.8 13.32 235.2 1.723C99.01-15.51-15.51 99.01 1.724 235.2c11.6 91.64 86.08 166.7 177.6 178.9c53.8 7.189 104.3-6.236 144.7-33.46l119.7 119.7c15.62 15.62 40.95 15.62 56.57 0C515.9 484.7 515.9 459.3 500.3 443.7zM79.1 208c0-70.58 57.42-128 128-128s128 57.42 128 128c0 70.58-57.42 128-128 128S79.1 278.6 79.1 208z"></path>
                         </svg>
@@ -135,7 +135,7 @@ function SiteHeader(props) {
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 128 512"
-                            className="fill-graydark h-5 opacity-70 w-8"
+                            className="fill-graydark h-5 opacity-50 w-8"
                         >
                             <path d="M56 472a56 56 0 1 1 0-112 56 56 0 1 1 0 112zm0-160a56 56 0 1 1 0-112 56 56 0 1 1 0 112zM0 96a56 56 0 1 1 112 0A56 56 0 1 1 0 96z"></path>
                         </svg>

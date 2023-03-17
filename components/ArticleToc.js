@@ -7,47 +7,19 @@ function ArticleToc(props) {
             class="flex xl:overflow-y-auto xl:px-8 xl:right-0 xl:sticky xl:top-14 xl:w-72 xl:z-20"
         >
             <nav className="mt-6">
-                <div className="separator">On this page</div>
-                <ul class="mb-6 p-0">
+                <div className="separator font-semibold text-base mb-3">
+                    On this page
+                </div>
+                <ul class="mb-6 p-0 text-left">
                     <li className="text-sm list-none">
-                        <ButtonPlain className="hover:text-textaccent text-left text-textprimary"></ButtonPlain>
-                        <button class="plain">Lorem ipsum dolor</button>
+                        <ButtonPlain className="hover:text-textaccent text-left text-textprimaryt">
+                            Lorem ipsum, dolor
+                        </ButtonPlain>
                     </li>
                     <li className="text-sm list-none">
-                        <ButtonPlain className="hover:text-textaccent text-left text-textprimary"></ButtonPlain>
-                        <button class="plain">Lorem ipsum dolor</button>
-                    </li>
-                    <li className="text-sm list-none">
-                        <ButtonPlain className="hover:text-textaccent text-left text-textprimary"></ButtonPlain>
-                        <button class="plain">Lorem ipsum dolor</button>
-                    </li>
-                    <li className="text-sm list-none">
-                        <ButtonPlain className="hover:text-textaccent text-left text-textprimary"></ButtonPlain>
-                        <button class="plain">Lorem ipsum dolor</button>
-                    </li>
-                    <li className="text-sm list-none">
-                        <ButtonPlain className="hover:text-textaccent text-left text-textprimary"></ButtonPlain>
-                        <button class="plain">Lorem ipsum dolor</button>
-                    </li>
-                    <li className="text-sm list-none">
-                        <ButtonPlain className="hover:text-textaccent text-left text-textprimary"></ButtonPlain>
-                        <button class="plain">Lorem ipsum dolor</button>
-                    </li>
-                    <li className="text-sm list-none">
-                        <ButtonPlain className="hover:text-textaccent text-left text-textprimary"></ButtonPlain>
-                        <button class="plain">Lorem ipsum dolor</button>
-                    </li>
-                    <li className="text-sm list-none">
-                        <ButtonPlain className="hover:text-textaccent text-left text-textprimary"></ButtonPlain>
-                        <button class="plain">Lorem ipsum dolor</button>
-                    </li>
-                    <li className="text-sm list-none">
-                        <ButtonPlain className="hover:text-textaccent text-left text-textprimary"></ButtonPlain>
-                        <button class="plain">Lorem ipsum dolor</button>
-                    </li>
-                    <li className="text-sm list-none">
-                        <ButtonPlain className="hover:text-textaccent text-left text-textprimary"></ButtonPlain>
-                        <button class="plain">Lorem ipsum dolor</button>
+                        <ButtonPlain className="hover:text-textaccent text-left text-textprimaryt">
+                            Lorem ipsum, dolor
+                        </ButtonPlain>
                     </li>
                 </ul>
             </nav>
