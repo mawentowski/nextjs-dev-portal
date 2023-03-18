@@ -7,7 +7,7 @@ function ArticleToc(props) {
             class="flex xl:overflow-y-auto xl:px-8 xl:right-0 xl:sticky xl:top-14 xl:w-72 xl:z-20"
         >
             <nav className="mt-6">
-                <div className="separator font-semibold text-base mb-3">
+                <div className="separator mb-3 text-sm font-medium">
                     On this page
                 </div>
                 <ul class="mb-6 p-0 text-left">
