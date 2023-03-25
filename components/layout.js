@@ -4,24 +4,19 @@ import abstractDiamondImage from '/public/abstract_diamonds.jpg';
 
 export default function Layout({ children }) {
     return (
-        <div id="main-wrapper">
-            <div id="bg-img-container">
-                <Image src={abstractDiamondImage} alt="abstract_diamonds" />
+        <div className="relative">
+            <div
+                id="bg-img-container"
+                className="w-3/4 flex justify-end absolute top-0 right-0 -z-10 opacity-70 -scale-y-100"
+            >
+                <Image
+                    src={abstractDiamondImage}
+                    alt="abstract_diamonds"
+                    className="m-0 opacity-40"
+                />
             </div>
             <SiteHeader />
             {children}
         </div>
     );
 }
-
-// {!home && (
-//     <div className={styles.backToHome}>
-//       <Link href="/">← Back to home</Link>
-//     </div>
-//   )}
-
-// {home  (
-//     <div className={styles.backToHome}>
-//       <Link href="/">← Back to home</Link>
-//     </div>
-//   )}

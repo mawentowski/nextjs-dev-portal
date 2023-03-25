@@ -5,14 +5,13 @@ import ArticleHeader from '../../../components/articleheader';
 import ArticleToc from '../../../components/articletoc';
 import Layout from '../../../components/layout';
 import Link from 'next/link';
-import PageNav from '../../../components/pagenav';
+
 import SideBar from '../../../components/sidebar';
 import { getAllArticleIds, getArticleData } from '../../../lib/articles';
 
 export default function Article({ articleData }) {
     return (
         <Layout>
-            <PageNav />
             <main
                 id="main-container"
                 className="w-full grid gap-6 mx-auto max-w-screen-xl px-6 md:px-0"

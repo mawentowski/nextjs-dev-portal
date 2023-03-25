@@ -3,6 +3,7 @@
 // import VersionSelector from './VersionSelector';
 import Link from 'next/link';
 import ButtonPlain from './ui/buttonplain';
+import PageNav from './pagenav';
 
 function SiteHeader(props) {
     return (
@@ -145,8 +146,19 @@ function SiteHeader(props) {
                     </ButtonPlain>
                 </div>
             </nav>
+            <PageNav />
         </header>
     );
 }
 
 export default SiteHeader;
+
+// header#site-header {
+//     /* background-color: transparent; */
+//     /* background-color: white; */
+//     /* opacity: 85%; */
+
+//     background: rgba(255, 255, 255, 0.8);
+
+//     backdrop-filter: blur(4px);
+// }
