@@ -6,7 +6,10 @@ import ButtonPlain from './ui/buttonplain';
 
 function SiteHeader(props) {
     return (
-        <header className="bg-white border-b border-b-graymedium border-gray_light flex flex-col flex-nowrap items-center sticky top-0 z-30">
+        <header
+            id="site-header"
+            className=" border-b border-b-graymedium border-gray_light flex flex-col flex-nowrap items-center sticky top-0 z-30"
+        >
             <nav className="flex max-w-screen-xl mx-auto px-6 py-3 w-full ">
                 <Link href="/" className="flex items-center p-0 text-xl">
                     <svg
