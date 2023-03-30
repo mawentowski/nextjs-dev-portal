@@ -1,58 +1,58 @@
 function TabbedCodeSamples(props) {
     return (
-        <div class="code-section with-tabs custom-margins">
-            <div class="code-section-header">
-                <div class="code-tabs">
+        <div className="code-section with-tabs custom-margins">
+            <div className="code-section-header">
+                <div className="code-tabs">
                     <button
-                        class="tablinks default-code-sample-tab"
+                        className="tablinks default-code-sample-tab"
                         onclick="openTab(event, 'bash-attach-to-a-device')"
                     >
                         curl
                     </button>
                     <button
-                        class="tablinks"
+                        className="tablinks"
                         onclick="openTab(event, 'Ruby-attach-to-a-device')"
                     >
                         Ruby
                     </button>
                     <button
-                        class="tablinks"
+                        className="tablinks"
                         onclick="openTab(event, 'Python-attach-to-a-device')"
                     >
                         Python
                     </button>
                     <button
-                        class="tablinks"
+                        className="tablinks"
                         onclick="openTab(event, 'PHP-attach-to-a-device')"
                     >
                         PHP
                     </button>
                     <button
-                        class="tablinks"
+                        className="tablinks"
                         onclick="openTab(event, 'Java-attach-to-a-device')"
                     >
                         Java
                     </button>
                     <button
-                        class="tablinks"
+                        className="tablinks"
                         onclick="openTab(event, 'Node-attach-to-a-device')"
                     >
                         Node
                     </button>
                     <button
-                        class="tablinks"
+                        className="tablinks"
                         onclick="openTab(event, 'Go-attach-to-a-device')"
                     >
                         Go
                     </button>
                     <button
-                        class="tablinks"
+                        className="tablinks"
                         onclick="openTab(event, 'NET-attach-to-a-device')"
                     >
                         .NET
                     </button>
                 </div>
-                <div class="copy-code-btn-container">
+                <div className="copy-code-btn-container">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 384 512"
@@ -61,52 +61,52 @@ function TabbedCodeSamples(props) {
                     </svg>
                 </div>
             </div>
-            <div class="copied-popup hidden">Copied!</div>
+            <div className="copied-popup hidden">Copied!</div>
 
-            <div id="bash-attach-to-a-device" class="tabcontent dark">
+            <div id="bash-attach-to-a-device" className="tabcontent dark">
                 <pre>
                     {' '}
-                    <code class="language-bash">Test</code>
+                    <code className="language-bash">Test</code>
                 </pre>
             </div>
 
-            {/* <div id="Ruby-attach-to-a-device" class="tabcontent dark"><pre><code class="language-ruby">
+            {/* <div id="Ruby-attach-to-a-device" className="tabcontent dark"><pre><code className="language-ruby">
                 Test     
             </code>
             </pre>
             </div>
 
-            <div id="Python-attach-to-a-device" class="tabcontent dark"><pre> <code class="language-python">
+            <div id="Python-attach-to-a-device" className="tabcontent dark"><pre> <code className="language-python">
                 Test
             </code>
             </pre>
             </div>
 
-            <div id="PHP-attach-to-a-device" class="tabcontent dark"><pre> <code class="language-php">
+            <div id="PHP-attach-to-a-device" className="tabcontent dark"><pre> <code className="language-php">
                 Test  
             </code>
             </pre>
             </div>
 
-            <div id="Java-attach-to-a-device" class="tabcontent dark"><pre><code class="language-java">
+            <div id="Java-attach-to-a-device" className="tabcontent dark"><pre><code className="language-java">
                 Test   
             </code>
             </pre>
             </div>
 
-            <div id="Node-attach-to-a-device" class="tabcontent dark"><pre><code class="language-javascript">
+            <div id="Node-attach-to-a-device" className="tabcontent dark"><pre><code className="language-javascript">
                 Test
             </code>
             </pre>
             </div>
 
-            <div id="Go-attach-to-a-device" class="tabcontent dark"><pre><code class="language-go">
+            <div id="Go-attach-to-a-device" className="tabcontent dark"><pre><code className="language-go">
                 Test
             </code>
             </pre>
             </div>
 
-            <div id="NET-attach-to-a-device" class="tabcontent dark"><pre><code class="language-csharp">
+            <div id="NET-attach-to-a-device" className="tabcontent dark"><pre><code className="language-csharp">
                 Test
             </code>
             </pre>

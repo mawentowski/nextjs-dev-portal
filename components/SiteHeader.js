@@ -4,10 +4,13 @@
 import Link from 'next/link';
 import ButtonPlain from './ui/buttonplain';
 import PageNav from './pagenav';
+import styled from 'styled-components';
+import { useState } from 'react';
+import clsx from 'clsx';
 
 function SiteHeader(props) {
     return (
-        <header
+        <div
             id="site-header"
             className=" border-b border-b-graymedium border-gray_light flex flex-col flex-nowrap items-center sticky top-0 z-30"
         >
@@ -27,50 +30,17 @@ function SiteHeader(props) {
                     </span>
                 </Link>
 
-                <div class="bg-graylight border-none font-normal hover:bg-graymedium inline-block ml-4 mr-10 px-2 py-1 relative rounded-3xl text-sm xs:ml-0">
-                    <button class="border-none flex items-center p-0 text-graydark text-sm">
-                        {/* Need to apply this by script: svg.rotated {transform: rotate(-90deg); */}
-                        <div class="text-sm inline-block">v.3.2.1</div>
-                        <span class="flex w-4">
-                            <svg
-                                id="apis-drop-down-expander"
-                                viewBox="0 0 70 70"
-                                class="h-5 origin-center rotate-90 w-4"
-                            >
-                                <path
-                                    fill="transparent"
-                                    d="M70 35A35 35 0 1135 0a35 35 0 0135 35"
-                                ></path>
-                                <path
-                                    fill="#6B7280"
-                                    d="M45.88 33.74l-.66-.66L27.3 15.1a1.78 1.78 0 00-2.52 0l-.66.66a1.78 1.78 0 000 2.52L40.78 35 24.12 51.72a1.78 1.78 0 000 2.52l.66.66a1.78 1.78 0 002.52 0L45.17 37l.66-.66a1.8 1.8 0 000-2.53z"
-                                ></path>
-                            </svg>
-                        </span>
-                    </button>
-                    {/* had the class dropdown-content  */}
-                    <div id="myDropdown" class="hidden">
-                        <a
-                            href="https://www.google.com"
-                            target="_blank"
-                            rel="noreferrer"
-                            class="block py-2 px-5"
-                        >
-                            v3.2.1
-                        </a>
-                        <a href="www.google.com">v2.2.19</a>
-                        <a href="www.google.com">v1.9.6</a>
-                    </div>
-                </div>
+                <VersionSelector></VersionSelector>
+
                 <Link
                     href="/blog/blog"
-                    className="bg-bluelight border border-0 hidden hover:bg-bluemedium lg:flex ml-0.5 px-2 py-1 rounded-2xl"
+                    className="bg-bluelight  border-0 hidden hover:bg-bluemedium lg:flex  px-2 py-1 rounded-2xl ml-2 "
                 >
                     <span className="font-normal text-bluedark text-sm">
                         sdfdsit amet consectetur. Lorem ipsum
                     </span>
-                    <div class="cursor-pointer flex ml-1">
-                        <svg id="" viewBox="0 0 70 70" class="w-4 h-5">
+                    <div className="cursor-pointer flex ml-1">
+                        <svg id="" viewBox="0 0 70 70" className="w-4 h-5">
                             <path
                                 fill="transparent"
                                 d="M70 35A35 35 0 1135 0a35 35 0 0135 35"
@@ -83,8 +53,8 @@ function SiteHeader(props) {
                     </div>
                 </Link>
 
-                <div class="item-center lg:flex ml-auto">
-                    <nav class="hidden items-center lg:flex">
+                <div className="item-center lg:flex ml-auto">
+                    <nav className="hidden items-center lg:flex">
                         <Link
                             href="/articles/intro"
                             className="bg-transparent border-0 font-medium hover:text-bluedark mr-4 my-0 text-sm text-textprimary"
@@ -98,7 +68,7 @@ function SiteHeader(props) {
                             Blog
                         </Link>
                     </nav>
-                    <nav class="border-l border-l-graymedium hidden lg:flex pl-8">
+                    <nav className="border-l border-l-graymedium hidden lg:flex pl-8">
                         <ButtonPlain className="flex">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -125,7 +95,7 @@ function SiteHeader(props) {
                     </nav>
                 </div>
 
-                <div class="flex items-center lg:hidden ml-auto">
+                <div className="flex items-center lg:hidden ml-auto">
                     <ButtonPlain className="flex lg:hidden">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -147,9 +117,219 @@ function SiteHeader(props) {
                 </div>
             </nav>
             <PageNav />
-        </header>
+        </div>
     );
 }
+
+const VersionSelector = () => {
+    const [buttonStatus, setButtonStatus] = useState('collapsed');
+
+    const toggleDropDown = () => {
+        if (buttonStatus === 'expanded') {
+            setButtonStatus('collapsed');
+        } else {
+            setButtonStatus('expanded');
+        }
+
+        // console.log('Clicked!');
+    };
+    const versionsArray = ['v3.2.1', 'v3.2.2', 'v3.2.3'];
+
+    // const [versionsArrayState, updateVersionsArrayState] =
+    //     useState(versionsArray);
+
+    // console.log(`${versionsArray} is the first array.`);
+
+    // const [versions, setVersion] = useState(versionsArray);
+
+    // const selectVersion = (version) => {
+    //     setVersion('1');
+    // };
+    const [selectedVersion, updateSelectedVersion] = useState(versionsArray[0]);
+    const updateVersionArray = (buttonVersion) => {
+        versionsArray.map((versionArrayElement, versionArrayIndex) => {
+            if (versionArrayElement === buttonVersion) {
+                console.log(
+                    `${versionsArray} is the initial array before edits.`
+                );
+                console.log(
+                    `${selectedVersion} is the default selected version.`
+                );
+                console.log(
+                    `${versionArrayElement} is the matching array element.`
+                );
+                console.log(
+                    `${versionArrayIndex} is the index of the matching array element.`
+                );
+                console.log(
+                    `${buttonVersion} is the version the button passed`
+                );
+                versionsArray.splice(versionArrayIndex, 1);
+                console.log(
+                    `${versionsArray} is updated array after ${versionArrayElement} was spliced from index ${versionArrayIndex}`
+                );
+                versionsArray.splice(0, 0, versionArrayElement);
+                console.log(
+                    `${versionsArray} is updated array after adding ${versionArrayElement} to the beginning`
+                );
+                updateSelectedVersion(versionArrayElement);
+                // console.log(
+                //     `${selectedVersion} is the new selected version the top dropdown item should update to match this`
+                // );
+
+                // delete versionsArray[index];
+                // console.log(
+                //     `${versionsArray} is the updated state of the original array after the current index is deleted`
+                // // );
+                // versionsArray.unshift(versionArrayElement);
+                // console.log(
+                //     `${versionsArray} is the updated state of the original array after the unshift. v3.2.2 should be the first time.`
+                // );
+            }
+        });
+    };
+
+    // const GenerateButtons = () => {
+    //     return (
+    //         <>
+    //             {versions.map((version) => {
+    //                 <button
+    //                     key={version}
+    //                     onClick={(e) => updateVersionArray(e.target.value)}
+    //                     className="block px-2 py-1 hover:bg-graylight text-textprimary text-left"
+    //                 >
+    //                     {version}
+    //                 </button>;
+    //             })}
+    //         </>
+    //     );
+    // };
+
+    return (
+        <div
+            className={clsx(
+                'bg-graylight border-none font-normal inline-block  px-2 py-1 relative rounded-3xl text-sm xs:ml-0 ml-3',
+                {
+                    ['hover:bg-graymedium']: buttonStatus === 'collapsed',
+                }
+            )}
+        >
+            <button
+                onClick={toggleDropDown}
+                className="border-none flex items-center p-0 text-graydark text-sm"
+            >
+                <div className="text-sm inline-block">{selectedVersion}</div>
+                <span className="flex w-4">
+                    {/* Need to apply this by script: svg.rotated {transform: rotate(-90deg); */}
+
+                    <svg
+                        id="apis-drop-down-expander"
+                        viewBox="0 0 70 70"
+                        className="h-5 origin-center rotate-90 w-4"
+                    >
+                        <path
+                            fill="transparent"
+                            d="M70 35A35 35 0 1135 0a35 35 0 0135 35"
+                        ></path>
+                        <path
+                            fill="#6B7280"
+                            d="M45.88 33.74l-.66-.66L27.3 15.1a1.78 1.78 0 00-2.52 0l-.66.66a1.78 1.78 0 000 2.52L40.78 35 24.12 51.72a1.78 1.78 0 000 2.52l.66.66a1.78 1.78 0 002.52 0L45.17 37l.66-.66a1.8 1.8 0 000-2.53z"
+                        ></path>
+                    </svg>
+                </span>
+
+                {/* <div id="myDropdown" className="hidden"></div> */}
+            </button>
+
+            {/* border-color: rgb(229 231 235 / var(--tw-border-opacity));
+            border-width: 1px; 
+            */}
+
+            <div
+                id="myDropdown"
+                className={clsx(
+                    'absolute bg-white w-32 shadow-textaccent/25 -left-0 rounded-md  flex flex-col border-graymedium border top-8 z-30',
+                    {
+                        ['hidden']: buttonStatus === 'collapsed',
+                        ['flex']: buttonStatus === 'expanded',
+                    }
+                )}
+            >
+                <div className="flex px-2 py-1 text-bluedark">
+                    <span>{selectedVersion}</span>
+
+                    <svg
+                        viewBox="0 0 16 12"
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="w-3 inline-block ml-auto"
+                    >
+                        <title>icon-checkmark</title>
+                        <path
+                            d="M5.3 11.21l-5-4.96c-.4-.39-.4-1.03 0-1.42a1 1 0 0 1 1.4 0L6 9.05 14.3.8a1 1 0 0 1 1.41 0c.4.39.4 1.03 0 1.42l-9 8.99a1 1 0 0 1-1.4 0z"
+                            fill="#3B82F6"
+                            fillRule="evenodd"
+                        />
+                    </svg>
+                </div>
+                {/* <button value="blue" onClick={e => changeColor(e.target.value)}>Color Change</button> */}
+
+                <button
+                    value={versionsArray[1]}
+                    onClick={(e) => updateVersionArray(e.target.value)}
+                    className="block px-2 py-1 hover:bg-graylight text-textprimary text-left"
+                >
+                    {versionsArray[1]}
+                </button>
+                <button
+                    value={versionsArray[2]}
+                    onClick={(e) => updateVersionArray(e.target.value)}
+                    className="block px-2 py-1 hover:bg-graylight text-textprimary text-left"
+                >
+                    {versionsArray[2]}
+                </button>
+
+                {/* {versionsArray.map((version) => {
+                    <button
+                        key={version}
+                        onClick={(e) => updateVersionArray(e.target.value)}
+                        className="block px-2 py-1 hover:bg-graylight text-textprimary text-left"
+                    >
+                        {version}
+                    </button>;
+                })} */}
+            </div>
+        </div>
+    );
+};
+
+// const VersionManager = () => {
+//     const [version, setVersion] = useState('v3.2.1');
+//     const versions = ['v3.2.1', 'v3.2.2', 'v3.2.3'];
+
+//     const defaultVersion = versions[0];
+
+//     const selectVersion = (props) => {
+//         setVersion(props.version);
+//     };
+//     return <></>;
+// };
+
+// const VersionButton = () => {
+//     const version = versions[1];
+//     return (
+//         <button
+//             onClick={selectVersion({ version })}
+//             className="block px-2 py-1 hover:bg-graylight text-textprimary text-left"
+//         >
+//             {version}
+//         </button>
+//     );
+// };
+
+// const Header = styled.div`
+//     background: rgba(255, 255, 255, 0.8);
+//     backdrop-filter: blur(4px);
+// `;
 
 export default SiteHeader;
 
@@ -162,3 +342,28 @@ export default SiteHeader;
 
 //     backdrop-filter: blur(4px);
 // }
+
+// function myFunction() {
+//     document.getElementById('myDropdown').classList.toggle('show');
+//     document.getElementById('myDropdown').classList.toggle('hidden');
+//     document
+//         .getElementById('apis-drop-down-expander')
+//         .classList.toggle('rotated');
+// }
+
+// window.onclick = function (event) {
+//     if (!event.target.matches('.dropbtn')) {
+//         var dropdowns = document.getElementsByClassName('dropdown-content');
+//         var apiDropdownExpander = document.getElementsByClassName(
+//             'apis-drop-down-expander'
+//         );
+//         var i;
+//         for (i = 0; i < dropdowns.length; i++) {
+//             var openDropdown = dropdowns[i];
+//             if (openDropdown.classList.contains('show')) {
+//                 openDropdown.classList.remove('show');
+//                 apiDropdownExpander.classList.remove('rotated');
+//             }
+//         }
+//     }
+// };

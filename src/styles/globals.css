@@ -682,7 +682,11 @@ a {
     }
 } */
 
-header#site-header {
-    background: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(4px);
+#site-header {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(9px);
+}
+
+#subnav {
+    border-bottom: 0.5px;
 }

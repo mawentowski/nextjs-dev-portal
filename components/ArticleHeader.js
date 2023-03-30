@@ -1,7 +1,7 @@
 function ArticleHeader() {
     return (
         <nav id="#article-header">
-            <div class="font-semibold mb-2 text-sm">
+            <div className="font-semibold mb-2 text-sm">
                 <h5 className="text-bluedark">Current Article</h5>
             </div>
             <div>

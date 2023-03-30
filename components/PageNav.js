@@ -5,7 +5,7 @@ export default function PageNav() {
     return (
         <nav
             id="subnav"
-            className="border-b border-b-graymedium flex flex-nowrap items-center md:hidden px-0 py-3 sticky top-0 w-full z-20"
+            className=" border-b-graymedium flex flex-nowrap items-center md:hidden px-0 py-3 sticky top-0 w-full z-20"
         >
             <div className="flex items-center max-w-screen-xl mx-auto px-6 w-full">
                 <ButtonPlain className="flex">

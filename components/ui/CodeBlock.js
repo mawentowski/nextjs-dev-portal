@@ -1,10 +1,10 @@
 function CodeBlock(props) {
     return (
         <div>
-            <div class="method-example atom-one-light">
-                <div class="method-example-top-bar">Response</div>
+            <div className="method-example atom-one-light">
+                <div className="method-example-top-bar">Response</div>
                 <pre>
-                    <code class="language-json">
+                    <code className="language-json">
                         token_type: Bearer,
                         <br />
                         expires_in: 3599,
@@ -26,9 +26,9 @@ function CodeBlock(props) {
                 lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
                 lorem ipsum lorem ipsum lorem ipsum lorem ipsum
             </p>
-            <div class="method-example atom-one-light">
+            <div className="method-example atom-one-light">
                 <pre>
-                    <code class="language-json">
+                    <code className="language-json">
                         token_type: Bearer,
                         <br />
                         expires_in: 3599,

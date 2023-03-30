@@ -3,7 +3,7 @@ import TabbedCodeSamples from './ui/tabbedcodesamples';
 
 function ArticleContent(props) {
     return (
-        <div class="article-content">
+        <div className="article-content">
             <h2>Heading 1- Editor Setup</h2>
             <p>
                 Paragraph - Lorem ipsum dolor, sit{' '}
