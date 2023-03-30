@@ -130,60 +130,85 @@ const VersionSelector = () => {
         } else {
             setButtonStatus('expanded');
         }
-
-        // console.log('Clicked!');
     };
-    const versionsArray = ['v3.2.1', 'v3.2.2', 'v3.2.3'];
+    const versionsArray = ['v3.2.1', 'v4.8.3', 'v7.1.6'];
 
-    // const [versionsArrayState, updateVersionsArrayState] =
-    //     useState(versionsArray);
+    // The sorting does not work well with objects. Need to extract the versions into an array so it can be sorted. Another feature would be not to have to include defaultSelected on all entries.
 
-    // console.log(`${versionsArray} is the first array.`);
+    // const versionsArrayOfObjects = [
+    //     {
+    //         version: '321',
+    //         defaultSelected: false,
+    //     },
+    //     {
+    //         version: '343',
+    //         defaultSelected: true,
+    //     },
 
-    // const [versions, setVersion] = useState(versionsArray);
+    //     {
+    //         version: '362',
+    //         defaultSelected: false,
+    //     },
+    // ];
 
-    // const selectVersion = (version) => {
-    //     setVersion('1');
-    // };
-    const [selectedVersion, updateSelectedVersion] = useState(versionsArray[0]);
-    const updateVersionArray = (buttonVersion) => {
-        versionsArray.map((versionArrayElement, versionArrayIndex) => {
-            if (versionArrayElement === buttonVersion) {
+    // const newVersionsArrayOfObjects = versionsArrayOfObjects.reverse(
+    //     (a, b) => a.version - b.version
+    // );
+    // console.log(newVersionsArrayOfObjects);
+
+    const sortedVersionsArray = versionsArray.reverse();
+
+    const [sortedVersionsArrayState, updatesortedVersionsArrayState] =
+        useState(sortedVersionsArray);
+
+    const [selectedVersion, updateSelectedVersion] = useState(
+        sortedVersionsArrayState[0]
+    );
+    const reordersortedVersionsArray = (versionPassedByButton) => {
+        sortedVersionsArray.map((versionArrayElement, Index) => {
+            if (versionArrayElement === versionPassedByButton) {
                 console.log(
-                    `${versionsArray} is the initial array before edits.`
+                    `${sortedVersionsArray} is the initial sorted array before it is copied and edited`
                 );
                 console.log(
-                    `${selectedVersion} is the default selected version.`
+                    `${selectedVersion} is the currently selected version.`
                 );
                 console.log(
                     `${versionArrayElement} is the matching array element.`
                 );
                 console.log(
-                    `${versionArrayIndex} is the index of the matching array element.`
+                    `${Index} is the index of the matching array element.`
                 );
                 console.log(
-                    `${buttonVersion} is the version the button passed`
+                    `${versionPassedByButton} is the version the button passed`
                 );
-                versionsArray.splice(versionArrayIndex, 1);
+                const updatedVersionArray = sortedVersionsArray;
                 console.log(
-                    `${versionsArray} is updated array after ${versionArrayElement} was spliced from index ${versionArrayIndex}`
+                    `${updatedVersionArray} is the copied version of the array that will be edited`
                 );
-                versionsArray.splice(0, 0, versionArrayElement);
+
+                updatedVersionArray.splice(Index, 1);
                 console.log(
-                    `${versionsArray} is updated array after adding ${versionArrayElement} to the beginning`
+                    `${updatedVersionArray} is updated array after ${versionArrayElement} was spliced from index ${Index}`
+                );
+                updatedVersionArray.splice(0, 0, versionArrayElement);
+                console.log(
+                    `${updatedVersionArray} is updated array after adding ${versionArrayElement} to the beginning`
                 );
                 updateSelectedVersion(versionArrayElement);
+                updatesortedVersionsArrayState(updatedVersionArray);
+
                 // console.log(
                 //     `${selectedVersion} is the new selected version the top dropdown item should update to match this`
                 // );
 
-                // delete versionsArray[index];
+                // delete sortedVersionsArray[index];
                 // console.log(
-                //     `${versionsArray} is the updated state of the original array after the current index is deleted`
+                //     `${sortedVersionsArray} is the updated state of the original array after the current index is deleted`
                 // // );
-                // versionsArray.unshift(versionArrayElement);
+                // sortedVersionsArray.unshift(versionArrayElement);
                 // console.log(
-                //     `${versionsArray} is the updated state of the original array after the unshift. v3.2.2 should be the first time.`
+                //     `${sortedVersionsArray} is the updated state of the original array after the unshift. v3.2.2 should be the first time.`
                 // );
             }
         });
@@ -195,7 +220,7 @@ const VersionSelector = () => {
     //             {versions.map((version) => {
     //                 <button
     //                     key={version}
-    //                     onClick={(e) => updateVersionArray(e.target.value)}
+    //                     onClick={(e) => reordersortedVersionsArray(e.target.value)}
     //                     className="block px-2 py-1 hover:bg-graylight text-textprimary text-left"
     //                 >
     //                     {version}
@@ -274,24 +299,24 @@ const VersionSelector = () => {
                 {/* <button value="blue" onClick={e => changeColor(e.target.value)}>Color Change</button> */}
 
                 <button
-                    value={versionsArray[1]}
-                    onClick={(e) => updateVersionArray(e.target.value)}
+                    value={sortedVersionsArrayState[1]}
+                    onClick={(e) => reordersortedVersionsArray(e.target.value)}
                     className="block px-2 py-1 hover:bg-graylight text-textprimary text-left"
                 >
-                    {versionsArray[1]}
+                    {sortedVersionsArrayState[1]}
                 </button>
                 <button
-                    value={versionsArray[2]}
-                    onClick={(e) => updateVersionArray(e.target.value)}
+                    value={sortedVersionsArrayState[2]}
+                    onClick={(e) => reordersortedVersionsArray(e.target.value)}
                     className="block px-2 py-1 hover:bg-graylight text-textprimary text-left"
                 >
-                    {versionsArray[2]}
+                    {sortedVersionsArrayState[2]}
                 </button>
 
-                {/* {versionsArray.map((version) => {
+                {/* {sortedVersionsArray.map((version) => {
                     <button
                         key={version}
-                        onClick={(e) => updateVersionArray(e.target.value)}
+                        onClick={(e) => reordersortedVersionsArray(e.target.value)}
                         className="block px-2 py-1 hover:bg-graylight text-textprimary text-left"
                     >
                         {version}
