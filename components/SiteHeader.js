@@ -164,7 +164,7 @@ const VersionSelector = () => {
     const [selectedVersion, updateSelectedVersion] = useState(
         sortedVersionsArrayState[0]
     );
-    const reordersortedVersionsArray = (versionPassedByButton) => {
+    const reorderSortedVersionsArray = (versionPassedByButton) => {
         sortedVersionsArray.map((versionArrayElement, Index) => {
             if (versionArrayElement === versionPassedByButton) {
                 console.log(
@@ -220,7 +220,7 @@ const VersionSelector = () => {
     //             {versions.map((version) => {
     //                 <button
     //                     key={version}
-    //                     onClick={(e) => reordersortedVersionsArray(e.target.value)}
+    //                     onClick={(e) => reorderSortedVersionsArray(e.target.value)}
     //                     className="block px-2 py-1 hover:bg-graylight text-textprimary text-left"
     //                 >
     //                     {version}
@@ -298,30 +298,48 @@ const VersionSelector = () => {
                 </div>
                 {/* <button value="blue" onClick={e => changeColor(e.target.value)}>Color Change</button> */}
 
-                <button
+                {/* <button
                     value={sortedVersionsArrayState[1]}
-                    onClick={(e) => reordersortedVersionsArray(e.target.value)}
+                    onClick={(e) => reorderSortedVersionsArray(e.target.value)}
                     className="block px-2 py-1 hover:bg-graylight text-textprimary text-left"
                 >
                     {sortedVersionsArrayState[1]}
                 </button>
                 <button
                     value={sortedVersionsArrayState[2]}
-                    onClick={(e) => reordersortedVersionsArray(e.target.value)}
+                    onClick={(e) => reorderSortedVersionsArray(e.target.value)}
                     className="block px-2 py-1 hover:bg-graylight text-textprimary text-left"
                 >
                     {sortedVersionsArrayState[2]}
-                </button>
+                </button> */}
+                {console.log(
+                    `this is the version of array before generating buttons: ${sortedVersionsArrayState}`
+                )}
 
-                {/* {sortedVersionsArray.map((version) => {
-                    <button
-                        key={version}
-                        onClick={(e) => reordersortedVersionsArray(e.target.value)}
-                        className="block px-2 py-1 hover:bg-graylight text-textprimary text-left"
-                    >
-                        {version}
-                    </button>;
-                })} */}
+                {sortedVersionsArrayState.map((sortedVersionsArrayElement) => {
+                    console.log(
+                        `the current mapped element is ${sortedVersionsArrayElement}`
+                    );
+                    console.log(
+                        `the current array state element is ${sortedVersionsArrayState[0]}`
+                    );
+                    if (sortedVersionsArrayElement === selectedVersion) {
+                        return null;
+                    }
+                    return (
+                        <button
+                            key={sortedVersionsArrayElement}
+                            onClick={(e) =>
+                                reorderSortedVersionsArray(
+                                    sortedVersionsArrayElement
+                                )
+                            }
+                            className="block px-2 py-1 hover:bg-graylight text-textprimary text-left"
+                        >
+                            {sortedVersionsArrayElement}
+                        </button>
+                    );
+                })}
             </div>
         </div>
     );
