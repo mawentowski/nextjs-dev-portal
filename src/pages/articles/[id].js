@@ -12,6 +12,7 @@ import ButtonPlain from '../../../components/ui/buttonplain';
 import path from 'path';
 import fs from 'fs';
 import { serialize } from 'next-mdx-remote/serialize';
+import matter from 'gray-matter';
 
 // https://blog.jetbrains.com/webstorm/2021/10/building-a-blog-with-next-js-and-mdx/#GettingourPostPagepropswithgetStaticProps
 
@@ -85,19 +86,21 @@ export async function getStaticPaths() {
 
 // The getStaticProps method fetches data at build time. When we build our app, Next.js is going to run the getStaticProps method, take the data from it, pass it to our component as props, and then use that to generate the page.
 
-export async function getStaticProps({ params, frontMatter }) {
+export async function getStaticProps({ params }) {
+    // take the params array as props that contains the ids
     // create a full path to the mdx file by combining the directory with the
-    // MDX file that has the specificed ID.
-    const slug = params.id;
-    const fullPath = path.join(articlesDirectory, `${slug}.mdx`);
-    // readFileSync- get the data in our individual files.
-
-    const fileContents = fs.readFileSync(fullPath, 'utf8');
-    const mdxSource = await serialize(fileContents);
+    // MDX file that has the specificed ID -- includes file extension
+    const fullPath = path.join(articlesDirectory, `${params.id}.mdx`);
+    // readFileSync- get the data in our individual file using the file full path.
+    const markdownWithMeta = fs.readFileSync(fullPath, 'utf8');
+    // ‘gray-matter’ to get our post’s front matter
+    const { data: frontMatter } = matter(markdownWithMeta);
+    // We’re using the serialize method to parse and compile the MDX string so that it can be rendered in our app.
+    const mdxSource = await serialize(markdownWithMeta);
 
     return {
         props: {
-            slug,
+            frontMatter,
             mdxSource,
         },
     };
