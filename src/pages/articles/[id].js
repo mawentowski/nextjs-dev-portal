@@ -1,13 +1,12 @@
 // import Date from '../../../components/dates';
 // import Head from 'next/head';
 import ArticleFooter from '../../../components/articlefooter';
-import ArticleHeader from '../../../components/articleheader';
-import ArticleToc from '../../../components/articletoc';
+import ArticleToc from '../../../components/ArticleToc';
 import Layout from '../../../components/layout';
 import Link from 'next/link';
 
 import SideBar from '../../../components/sidebar';
-import { getAllArticleIds, getArticleData } from '../../../lib/articles';
+import getAllArticleIds from '../../../lib/articles';
 import { MDXRemote } from 'next-mdx-remote';
 import ButtonPlain from '../../../components/ui/buttonplain';
 import path from 'path';
@@ -16,7 +15,10 @@ import { serialize } from 'next-mdx-remote/serialize';
 
 // https://blog.jetbrains.com/webstorm/2021/10/building-a-blog-with-next-js-and-mdx/#GettingourPostPagepropswithgetStaticProps
 
-export default function Article(mdxSource) {
+// Each page is associated with a route based on its file name.
+// The default is Defining routes by using predefined paths
+
+export default function Article({ mdxSource, slug }) {
     return (
         <Layout>
             <main
@@ -26,13 +28,22 @@ export default function Article(mdxSource) {
                 <SideBar />
 
                 <main id="article" className="grid order-1 md:pr-6 xl:pr-0">
-                    <ArticleHeader />
+                    <nav id="#article-header">
+                        <div className="font-semibold mb-2 text-sm">
+                            <h5 className="text-bluedark">Separator</h5>
+                        </div>
+                        <div>
+                            <h1></h1>
+                            <p className="mb-0 mt-2 text-lg">
+                                Lorem ipsum dolor sit amet consectetur
+                                adipisicing elit. Quae eligendi assumenda autem
+                                cupiditate esse suscipit dolorem in incidunt
+                                voluptates magni. This is the slug: {slug}
+                            </p>
+                        </div>
+                    </nav>
+
                     <ArticleToc />
-                    {/* <div
-                        dangerouslySetInnerHTML={{
-                            __html: articleData.contentHtml,
-                        }}
-                    /> */}
 
                     {/* We’ll use MDXRemote to consume the output of serialize, so that we can render it directly into the PostPage component. The MDXRemote component also has an optional components prop, which we’ll be using to supply components to our MDX files. */}
 
@@ -54,52 +65,40 @@ export default function Article(mdxSource) {
 const articlesDirectory = path.join(process.cwd(), 'articles');
 
 export async function getStaticPaths() {
-    // getAllArticleIds loops through each file name in articles directory.
-    // returns a PARAMS object with a method that does a replacement to remove .mdx from filenames
-    // the id is an object property.
     const paths = getAllArticleIds();
+
+    // Paths looks like this (not used), array of objects
+
+    const arbitraryArrayOfObjects = [
+        { params: { id: '.DS_Store' } },
+        { params: { id: 'article-1' } },
+        { params: { id: 'article-2' } },
+        { params: { id: 'intro' } },
+    ];
+
     console.log(paths);
-    // returns a array of objects I believe that looks like this:
-
-    // params: {
-    //     id: fileName.replace(/\.md$/, ''),
-    // },
-
-    // return paths variable which contains an object with the property params, which, in turn, has our post slug
-    // We’re setting the fallback property in our return statement to false so that any paths not included in our paths list will result in a 404 page
-
     return {
         paths,
         fallback: false,
     };
 }
 
-// it accepts params from the getAllArticleIds function
-// the params property contains an id
-// pass the id to the getArticleData function to get the content of that particular MDX file
-export async function getStaticProps({ params }) {
-    // const fs = require('fs/promises');
-    const fullPath = path.join(articlesDirectory, `${params.id}.mdx`);
+// The getStaticProps method fetches data at build time. When we build our app, Next.js is going to run the getStaticProps method, take the data from it, pass it to our component as props, and then use that to generate the page.
+
+export async function getStaticProps({ params, frontMatter }) {
+    // create a full path to the mdx file by combining the directory with the
+    // MDX file that has the specificed ID.
+    const slug = params.id;
+    const fullPath = path.join(articlesDirectory, `${slug}.mdx`);
+    // readFileSync- get the data in our individual files.
+
     const fileContents = fs.readFileSync(fullPath, 'utf8');
     const mdxSource = await serialize(fileContents);
 
     return {
-        props: mdxSource,
+        props: {
+            slug,
+            mdxSource,
+        },
     };
 }
-
-// export const getStaticProps = async ({ params: { slug } }) => {
-//     const markdownWithMeta = fs.readFileSync(path.join('posts',
-//       slug + '.mdx'), 'utf-8')
-
-//     const { data: frontMatter, content } = matter(markdownWithMeta)
-//     const mdxSource = await serialize(content)
-
-//     return {
-//       props: {
-//         frontMatter,
-//         slug,
-//         mdxSource
-//       }
-//     }
-//   }
