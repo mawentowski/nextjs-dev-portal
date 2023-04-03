@@ -50,6 +50,7 @@ padding-right: var(--bs-gutter-x, 0.75rem);
 
 export async function getStaticPaths() {
     const paths = getAllArticleIds();
+    console.log(`The getAllArticlesIds function returns ${paths}`);
     return {
         paths,
         fallback: false,
@@ -58,6 +59,9 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
     const articleData = await getArticleData(params.id);
+    console.log(
+        `The getStaticProps function returns an object containing ${articleData}`
+    );
 
     return {
         props: {
