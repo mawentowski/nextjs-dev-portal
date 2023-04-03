@@ -32,7 +32,7 @@ export default function Article({
                 <SideBar />
 
                 <main id="article" className="grid order-1 md:pr-6 xl:pr-0">
-                    <nav id="#article-header">
+                    <nav id="article-header">
                         <div className="font-semibold mb-2 text-sm">
                             <h5 className="text-bluedark">Separator</h5>
                         </div>
@@ -45,8 +45,12 @@ export default function Article({
                     <ArticleToc />
 
                     {/* We’ll use MDXRemote to consume the output of serialize, so that we can render it directly into the PostPage component. The MDXRemote component also has an optional components prop, which we’ll be using to supply components to our MDX files. */}
-
-                    <MDXRemote {...mdxSource} components={{ ButtonPlain }} />
+                    <div id="article-content">
+                        <MDXRemote
+                            {...mdxSource}
+                            components={{ ButtonPlain }}
+                        />
+                    </div>
 
                     {/* LEFT OFF HERE!!!! */}
 
@@ -66,12 +70,12 @@ export async function getStaticPaths() {
 
     // Paths looks like this (not used), array of objects
 
-    const arbitraryArrayOfObjects = [
-        { params: { id: '.DS_Store' } },
-        { params: { id: 'article-1' } },
-        { params: { id: 'article-2' } },
-        { params: { id: 'intro' } },
-    ];
+    // const paths = [
+    //     { params: { id: '.DS_Store' } },
+    //     { params: { id: 'article-1' } },
+    //     { params: { id: 'article-2' } },
+    //     { params: { id: 'intro' } },
+    // ];
 
     console.log(paths);
     return {
@@ -84,7 +88,7 @@ export async function getStaticPaths() {
 // The getStaticProps method fetches data at build time. When we build our app, Next.js is going to run the getStaticProps method, take the data from it, pass it to our component as props, and then use that to generate the page.
 
 export async function getStaticProps({ params }) {
-    // take the params array as props that contains the ids
+    // take a params object that contains an ID
     // create a full path to the mdx file by combining the directory with the
     // MDX file that has the specificed ID -- includes file extension
     const articlesDirectory = path.join(process.cwd(), 'articles');

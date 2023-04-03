@@ -1,6 +1,6 @@
 function ArticleFooter({ children }) {
     return (
-        <div id="#article-footer">
+        <div id="article-footer">
             <h2>Footer</h2>
             {children}
             <p>
