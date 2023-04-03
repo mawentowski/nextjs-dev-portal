@@ -10,13 +10,10 @@ import SideBar from '../../../components/sidebar';
 import { getAllArticleIds, getArticleData } from '../../../lib/articles';
 import { MDXRemote } from 'next-mdx-remote';
 import ButtonPlain from '../../../components/ui/buttonplain';
-import path from 'path';
-import fs from 'fs';
-import { serialize } from 'next-mdx-remote/serialize';
 
 // https://blog.jetbrains.com/webstorm/2021/10/building-a-blog-with-next-js-and-mdx/#GettingourPostPagepropswithgetStaticProps
 
-export default function Article(mdxSource) {
+export default function Article({ mdxSource }) {
     return (
         <Layout>
             <main
@@ -51,8 +48,6 @@ export default function Article(mdxSource) {
     );
 }
 
-const articlesDirectory = path.join(process.cwd(), 'articles');
-
 export async function getStaticPaths() {
     // getAllArticleIds loops through each file name in articles directory.
     // returns a PARAMS object with a method that does a replacement to remove .mdx from filenames
@@ -77,16 +72,16 @@ export async function getStaticPaths() {
 // it accepts params from the getAllArticleIds function
 // the params property contains an id
 // pass the id to the getArticleData function to get the content of that particular MDX file
-export async function getStaticProps({ params }) {
-    // const fs = require('fs/promises');
-    const fullPath = path.join(articlesDirectory, `${params.id}.mdx`);
-    const fileContents = fs.readFileSync(fullPath, 'utf8');
-    const mdxSource = await serialize(fileContents);
+// export async function getStaticProps({ params }) {
 
-    return {
-        props: mdxSource,
-    };
-}
+//     const articleData = await getArticleData(params.id);
+
+//     return {
+//         props: {
+//             articleData,
+//         },
+//     };
+// }
 
 // export const getStaticProps = async ({ params: { slug } }) => {
 //     const markdownWithMeta = fs.readFileSync(path.join('posts',

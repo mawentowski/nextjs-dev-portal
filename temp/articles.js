@@ -29,13 +29,13 @@ const articlesDirectory = path.join(process.cwd(), 'articles');
 //         },
 //     };
 
-//     // return allArticlesData.sort((a, b) => {
-//     //     if (a.date < b.date) {
-//     //         return 1;
-//     //     } else {
-//     //         return -1;
-//     //     }
-//     // });
+//     return allArticlesData.sort((a, b) => {
+//         if (a.date < b.date) {
+//             return 1;
+//         } else {
+//             return -1;
+//         }
+//     });
 // }
 
 export function getAllArticleIds() {
@@ -60,19 +60,18 @@ dangerouslySetInnerHTML={{
 /> */
 }
 
-export async function getArticleData(id) {
-    // GOAL: Get article data for particular MDX file using ID passed by  getStaticProps function
-    // in ./articles/[id].js
-    // save the full path by merging the articles/ directory with .mdx, separated by slashes
-    const fullPath = path.join(articlesDirectory, `${id}.mdx`);
-    // save the file contents of the specific MDX file to a variable
-    const fileContents = fs.readFileSync(fullPath, 'utf8');
+// GOAL: Get article data for particular MDX file using ID passed by  getStaticProps function
+// in ./articles/[id].js
+// save the full path by merging the articles/ directory with .mdx, separated by slashes
+// save the file contents of the specific MDX file to a variable
+// We also have a new method named serialize. The serialize method is from ‘next-mdx-remote‘, an npm package for adding MDX support in our Next.js app. We’re using the serialize method to parse and compile the MDX string so that it can be rendered in our app.
 
-    // We also have a new method named serialize. The serialize method is from ‘next-mdx-remote‘, an npm package for adding MDX support in our Next.js app. We’re using the serialize method to parse and compile the MDX string so that it can be rendered in our app.
+// export async function getArticleData(id) {
+//     const fullPath = path.join(articlesDirectory, `${id}.mdx`);
+//     const fileContents = fs.readFileSync(fullPath, 'utf8');
+//     const mdxSource = await serialize(fileContents);
 
-    const mdxSource = await serialize(fileContents);
-
-    return {
-        props: mdxSource,
-    };
-}
+//     return {
+//         props: mdxSource,
+//     };
+// }
