@@ -1,14 +1,11 @@
-// import SiteNav from './SiteNav'
-// import './media-queries.css';
-// import VersionSelector from './VersionSelector';
 import Link from 'next/link';
 import ButtonPlain from './ui/buttonplain';
 import PageNav from './pagenav';
-import styled from 'styled-components';
 import { useState } from 'react';
 import clsx from 'clsx';
+import { useEffect, useRef } from 'react';
 
-function SiteHeader(props) {
+function SiteHeader() {
     return (
         <div
             id="site-header"
@@ -122,39 +119,33 @@ function SiteHeader(props) {
 }
 
 const VersionSelector = () => {
-    const [buttonStatus, setButtonStatus] = useState('collapsed');
+    const [open, setOpen] = useState(false);
+
+    let versionDropDownRef = useRef();
+
+    useEffect(() => {
+        let handler = (e) => {
+            if (!versionDropDownRef.current.contains(e.target)) {
+                setOpen(false);
+                console.log(versionDropDownRef.current);
+            }
+        };
+
+        document.addEventListener('mousedown', handler);
+
+        return () => {
+            document.removeEventListener('mousedown', handler);
+        };
+    });
 
     const toggleDropDown = () => {
-        if (buttonStatus === 'expanded') {
-            setButtonStatus('collapsed');
+        if (open === false) {
+            setOpen(true);
         } else {
-            setButtonStatus('expanded');
+            setOpen(false);
         }
     };
     const versionsArray = ['v3.2.1', 'v4.8.3', 'v7.1.6'];
-
-    // The sorting does not work well with objects. Need to extract the versions into an array so it can be sorted. Another feature would be not to have to include defaultSelected on all entries.
-
-    // const versionsArrayOfObjects = [
-    //     {
-    //         version: '321',
-    //         defaultSelected: false,
-    //     },
-    //     {
-    //         version: '343',
-    //         defaultSelected: true,
-    //     },
-
-    //     {
-    //         version: '362',
-    //         defaultSelected: false,
-    //     },
-    // ];
-
-    // const newVersionsArrayOfObjects = versionsArrayOfObjects.reverse(
-    //     (a, b) => a.version - b.version
-    // );
-    // console.log(newVersionsArrayOfObjects);
 
     const sortedVersionsArray = versionsArray.reverse();
 
@@ -167,82 +158,29 @@ const VersionSelector = () => {
     const reorderSortedVersionsArray = (versionPassedByButton) => {
         sortedVersionsArray.map((versionArrayElement, Index) => {
             if (versionArrayElement === versionPassedByButton) {
-                console.log(
-                    `${sortedVersionsArray} is the initial sorted array before it is copied and edited`
-                );
-                console.log(
-                    `${selectedVersion} is the currently selected version.`
-                );
-                console.log(
-                    `${versionArrayElement} is the matching array element.`
-                );
-                console.log(
-                    `${Index} is the index of the matching array element.`
-                );
-                console.log(
-                    `${versionPassedByButton} is the version the button passed`
-                );
                 const updatedVersionArray = sortedVersionsArray;
-                console.log(
-                    `${updatedVersionArray} is the copied version of the array that will be edited`
-                );
-
                 updatedVersionArray.splice(Index, 1);
-                console.log(
-                    `${updatedVersionArray} is updated array after ${versionArrayElement} was spliced from index ${Index}`
-                );
                 updatedVersionArray.splice(0, 0, versionArrayElement);
-                console.log(
-                    `${updatedVersionArray} is updated array after adding ${versionArrayElement} to the beginning`
-                );
                 updateSelectedVersion(versionArrayElement);
                 updatesortedVersionsArrayState(updatedVersionArray);
-
-                // console.log(
-                //     `${selectedVersion} is the new selected version the top dropdown item should update to match this`
-                // );
-
-                // delete sortedVersionsArray[index];
-                // console.log(
-                //     `${sortedVersionsArray} is the updated state of the original array after the current index is deleted`
-                // // );
-                // sortedVersionsArray.unshift(versionArrayElement);
-                // console.log(
-                //     `${sortedVersionsArray} is the updated state of the original array after the unshift. v3.2.2 should be the first time.`
-                // );
             }
         });
     };
 
-    // const GenerateButtons = () => {
-    //     return (
-    //         <>
-    //             {versions.map((version) => {
-    //                 <button
-    //                     key={version}
-    //                     onClick={(e) => reorderSortedVersionsArray(e.target.value)}
-    //                     className="block px-2 py-1 hover:bg-graylight text-textprimary text-left"
-    //                 >
-    //                     {version}
-    //                 </button>;
-    //             })}
-    //         </>
-    //     );
-    // };
-
     return (
         <div
+            ref={versionDropDownRef}
+            onClick={() => {
+                toggleDropDown();
+            }}
             className={clsx(
                 'bg-graylight border-none font-normal inline-block  px-2 py-1 relative rounded-3xl text-sm xs:ml-0 ml-3',
                 {
-                    ['hover:bg-graymedium']: buttonStatus === 'collapsed',
+                    ['hover:bg-graymedium']: open === 'open',
                 }
             )}
         >
-            <button
-                onClick={toggleDropDown}
-                className="border-none flex items-center p-0 text-graydark text-sm"
-            >
+            <button className="border-none flex items-center p-0 text-graydark text-sm">
                 <div className="text-sm inline-block">{selectedVersion}</div>
                 <span className="flex w-4">
                     {/* Need to apply this by script: svg.rotated {transform: rotate(-90deg); */}
@@ -273,10 +211,12 @@ const VersionSelector = () => {
             <div
                 id="myDropdown"
                 className={clsx(
-                    'absolute bg-white w-32 shadow-textaccent/25 -left-0 rounded-md  flex flex-col border-graymedium border top-8 z-30',
+                    'absolute bg-white w-32 shadow-textaccent/25 -left-0 rounded-md  flex flex-col border-graymedium border top-8 z-30 shadow-md ',
                     {
-                        ['hidden']: buttonStatus === 'collapsed',
-                        ['flex']: buttonStatus === 'expanded',
+                        ['hidden opacity-0 -translate-y-5 ease-out duration-300']:
+                            open === false,
+                        ['flex opacity-100 translate-y-0 ease-in duration-300']:
+                            open === true,
                     }
                 )}
             >
@@ -296,33 +236,8 @@ const VersionSelector = () => {
                         />
                     </svg>
                 </div>
-                {/* <button value="blue" onClick={e => changeColor(e.target.value)}>Color Change</button> */}
-
-                {/* <button
-                    value={sortedVersionsArrayState[1]}
-                    onClick={(e) => reorderSortedVersionsArray(e.target.value)}
-                    className="block px-2 py-1 hover:bg-graylight text-textprimary text-left"
-                >
-                    {sortedVersionsArrayState[1]}
-                </button>
-                <button
-                    value={sortedVersionsArrayState[2]}
-                    onClick={(e) => reorderSortedVersionsArray(e.target.value)}
-                    className="block px-2 py-1 hover:bg-graylight text-textprimary text-left"
-                >
-                    {sortedVersionsArrayState[2]}
-                </button> */}
-                {console.log(
-                    `this is the version of array before generating buttons: ${sortedVersionsArrayState}`
-                )}
 
                 {sortedVersionsArrayState.map((sortedVersionsArrayElement) => {
-                    console.log(
-                        `the current mapped element is ${sortedVersionsArrayElement}`
-                    );
-                    console.log(
-                        `the current array state element is ${sortedVersionsArrayState[0]}`
-                    );
                     if (sortedVersionsArrayElement === selectedVersion) {
                         return null;
                     }
@@ -345,68 +260,4 @@ const VersionSelector = () => {
     );
 };
 
-// const VersionManager = () => {
-//     const [version, setVersion] = useState('v3.2.1');
-//     const versions = ['v3.2.1', 'v3.2.2', 'v3.2.3'];
-
-//     const defaultVersion = versions[0];
-
-//     const selectVersion = (props) => {
-//         setVersion(props.version);
-//     };
-//     return <></>;
-// };
-
-// const VersionButton = () => {
-//     const version = versions[1];
-//     return (
-//         <button
-//             onClick={selectVersion({ version })}
-//             className="block px-2 py-1 hover:bg-graylight text-textprimary text-left"
-//         >
-//             {version}
-//         </button>
-//     );
-// };
-
-// const Header = styled.div`
-//     background: rgba(255, 255, 255, 0.8);
-//     backdrop-filter: blur(4px);
-// `;
-
 export default SiteHeader;
-
-// header#site-header {
-//     /* background-color: transparent; */
-//     /* background-color: white; */
-//     /* opacity: 85%; */
-
-//     background: rgba(255, 255, 255, 0.8);
-
-//     backdrop-filter: blur(4px);
-// }
-
-// function myFunction() {
-//     document.getElementById('myDropdown').classList.toggle('show');
-//     document.getElementById('myDropdown').classList.toggle('hidden');
-//     document
-//         .getElementById('apis-drop-down-expander')
-//         .classList.toggle('rotated');
-// }
-
-// window.onclick = function (event) {
-//     if (!event.target.matches('.dropbtn')) {
-//         var dropdowns = document.getElementsByClassName('dropdown-content');
-//         var apiDropdownExpander = document.getElementsByClassName(
-//             'apis-drop-down-expander'
-//         );
-//         var i;
-//         for (i = 0; i < dropdowns.length; i++) {
-//             var openDropdown = dropdowns[i];
-//             if (openDropdown.classList.contains('show')) {
-//                 openDropdown.classList.remove('show');
-//                 apiDropdownExpander.classList.remove('rotated');
-//             }
-//         }
-//     }
-// };
