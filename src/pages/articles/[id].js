@@ -19,7 +19,10 @@ import matter from 'gray-matter';
 // Each page is associated with a route based on its file name.
 // The default is Defining routes by using predefined paths
 
-export default function Article({ mdxSource, slug }) {
+export default function Article({
+    frontMatter: { title, summary },
+    mdxSource,
+}) {
     return (
         <Layout>
             <main
@@ -34,13 +37,8 @@ export default function Article({ mdxSource, slug }) {
                             <h5 className="text-bluedark">Separator</h5>
                         </div>
                         <div>
-                            <h1></h1>
-                            <p className="mb-0 mt-2 text-lg">
-                                Lorem ipsum dolor sit amet consectetur
-                                adipisicing elit. Quae eligendi assumenda autem
-                                cupiditate esse suscipit dolorem in incidunt
-                                voluptates magni. This is the slug: {slug}
-                            </p>
+                            <h1>{title}</h1>
+                            <p className="mb-0 mt-2 text-lg">{summary}</p>
                         </div>
                     </nav>
 
@@ -63,8 +61,6 @@ export default function Article({ mdxSource, slug }) {
     );
 }
 
-const articlesDirectory = path.join(process.cwd(), 'articles');
-
 export async function getStaticPaths() {
     const paths = getAllArticleIds();
 
@@ -80,6 +76,7 @@ export async function getStaticPaths() {
     console.log(paths);
     return {
         paths,
+        // We’re setting the fallback property in our return statement to false so that any paths not included in our paths list will result in a 404 page
         fallback: false,
     };
 }
@@ -90,13 +87,15 @@ export async function getStaticProps({ params }) {
     // take the params array as props that contains the ids
     // create a full path to the mdx file by combining the directory with the
     // MDX file that has the specificed ID -- includes file extension
+    const articlesDirectory = path.join(process.cwd(), 'articles');
     const fullPath = path.join(articlesDirectory, `${params.id}.mdx`);
     // readFileSync- get the data in our individual file using the file full path.
     const markdownWithMeta = fs.readFileSync(fullPath, 'utf8');
-    // ‘gray-matter’ to get our post’s front matter
-    const { data: frontMatter } = matter(markdownWithMeta);
-    // We’re using the serialize method to parse and compile the MDX string so that it can be rendered in our app.
-    const mdxSource = await serialize(markdownWithMeta);
+
+    // ‘gray-matter’ to get our post’s front matter. It separates the frontmatter from the content
+    const { data: frontMatter, content } = matter(markdownWithMeta);
+    // We’re using the serialize method to parse and compile the MDX string so that it can be rendered in our app. You are serializing the content, and not the frontMatter
+    const mdxSource = await serialize(content);
 
     return {
         props: {
