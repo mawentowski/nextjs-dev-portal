@@ -1,4 +1,4 @@
-import ButtonPlain from './ui/buttonplain';
+import Link from 'next/link';
 
 function ArticleToc(props) {
     return (
@@ -12,14 +12,20 @@ function ArticleToc(props) {
                 </div>
                 <ul className="mb-6 p-0 text-left">
                     <li className="text-sm list-none">
-                        <ButtonPlain className="hover:text-textaccent text-left text-textprimaryt">
+                        <Link
+                            href="/"
+                            className="hover:text-textaccent text-left text-textprimary"
+                        >
                             Lorem ipsum, dolor
-                        </ButtonPlain>
+                        </Link>
                     </li>
                     <li className="text-sm list-none">
-                        <ButtonPlain className="hover:text-textaccent text-left text-textprimaryt">
+                        <Link
+                            href="/"
+                            className="hover:text-textaccent text-left text-textprimary"
+                        >
                             Lorem ipsum, dolor
-                        </ButtonPlain>
+                        </Link>
                     </li>
                 </ul>
             </nav>

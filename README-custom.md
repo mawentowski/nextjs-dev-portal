@@ -53,3 +53,12 @@ Site header saved code:
 //     (a, b) => a.version - b.version
 // );
 // console.log(newVersionsArrayOfObjects);
+
+Add IDs:
+
+<!-- https://www.cyishere.dev/blog/toc-for-mdx-with-nextjs
+https://github.com/cyishere/nextjs-starter
+https://egghead.io/lessons/react-use-mdxprovider-to-control-the-rendering-of-markdown-elements-with-gatsby-mdx
+
+https://mikebifulco.com/posts/mdx-auto-link-headings-with-rehype-slug#automatically-linking-to-headings-in-your-mdx-posts -->
+

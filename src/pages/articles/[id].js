@@ -13,6 +13,7 @@ import path from 'path';
 import fs from 'fs';
 import { serialize } from 'next-mdx-remote/serialize';
 import matter from 'gray-matter';
+import MDXComponents from '../../../components/MDXComponents';
 
 // https://blog.jetbrains.com/webstorm/2021/10/building-a-blog-with-next-js-and-mdx/#GettingourPostPagepropswithgetStaticProps
 
@@ -23,6 +24,8 @@ export default function Article({
     frontMatter: { title, summary },
     mdxSource,
 }) {
+    // console.log(`This is Button plain: ${ButtonPlain}`);
+
     return (
         <Layout>
             <main
@@ -42,14 +45,54 @@ export default function Article({
                         </div>
                     </nav>
 
-                    <ArticleToc />
+                    {/* <ArticleToc /> */}
+
+                    <div
+                        id="article-toc"
+                        className="flex xl:overflow-y-auto xl:px-8 xl:right-0 xl:sticky xl:top-14 xl:w-72 xl:z-20"
+                    >
+                        <nav className="mt-6">
+                            <div className="separator mb-3 text-sm font-medium">
+                                On this page
+                            </div>
+
+                            {/* {headings.length > 0 ? (
+                                <ol>
+                                    {headings.map((heading) => (
+                                        <li key={heading.text}>
+                                            <a href={heading.link}>
+                                                {heading.text}
+                                            </a>
+                                        </li>
+                                    ))}
+                                </ol>
+                            ) : null} */}
+
+                            <ul className="mb-6 p-0 text-left">
+                                <li className="text-sm list-none">
+                                    <Link
+                                        href="/"
+                                        className="hover:text-textaccent text-left text-textprimary"
+                                    >
+                                        Lorem ipsum, dolor
+                                    </Link>
+                                </li>
+                                <li className="text-sm list-none">
+                                    <Link
+                                        href="/"
+                                        className="hover:text-textaccent text-left text-textprimary"
+                                    >
+                                        Lorem ipsum, dolor
+                                    </Link>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
 
                     {/* We’ll use MDXRemote to consume the output of serialize, so that we can render it directly into the PostPage component. The MDXRemote component also has an optional components prop, which we’ll be using to supply components to our MDX files. */}
+
                     <div id="article-content">
-                        <MDXRemote
-                            {...mdxSource}
-                            components={{ ButtonPlain }}
-                        />
+                        <MDXRemote {...mdxSource} components={MDXComponents} />
                     </div>
 
                     {/* LEFT OFF HERE!!!! */}
@@ -100,6 +143,11 @@ export async function getStaticProps({ params }) {
     const { data: frontMatter, content } = matter(markdownWithMeta);
     // We’re using the serialize method to parse and compile the MDX string so that it can be rendered in our app. You are serializing the content, and not the frontMatter
     const mdxSource = await serialize(content);
+
+    console.log(markdownWithMeta);
+    console.log(frontMatter);
+    console.log(content);
+    console.log(mdxSource);
 
     return {
         props: {
