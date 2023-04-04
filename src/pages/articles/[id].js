@@ -14,7 +14,8 @@ import fs from 'fs';
 import { serialize } from 'next-mdx-remote/serialize';
 import matter from 'gray-matter';
 import MDXComponents from '../../../components/MDXComponents';
-import { remark, html } from 'remark';
+import { remark } from 'remark';
+import html from 'remark-html';
 // https://blog.jetbrains.com/webstorm/2021/10/building-a-blog-with-next-js-and-mdx/#GettingourPostPagepropswithgetStaticProps
 
 // Each page is associated with a route based on its file name.
@@ -22,6 +23,7 @@ import { remark, html } from 'remark';
 
 export default function Article({
     frontMatter: { title, summary },
+    contentHtml,
     mdxSource,
 }) {
     // console.log(`This is Button plain: ${ButtonPlain}`);
@@ -45,7 +47,7 @@ export default function Article({
                         </div>
                     </nav>
 
-                    {/* <ArticleToc /> */}
+                    <ArticleToc />
 
                     {/* We’ll use MDXRemote to consume the output of serialize, so that we can render it directly into the PostPage component. The MDXRemote component also has an optional components prop, which we’ll be using to supply components to our MDX files. */}
 
@@ -212,7 +214,11 @@ export async function getStaticProps({ params }) {
     return {
         // Passed to the page component as props
         props: {
+            // string
+            contentHtml,
+            // object
             frontMatter,
+            // serialized MDX data
             mdxSource,
         },
     };
