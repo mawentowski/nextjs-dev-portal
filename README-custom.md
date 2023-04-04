@@ -62,3 +62,63 @@ https://egghead.io/lessons/react-use-mdxprovider-to-control-the-rendering-of-mar
 
 https://mikebifulco.com/posts/mdx-auto-link-headings-with-rehype-slug#automatically-linking-to-headings-in-your-mdx-posts -->
 
+
+
+```JS
+const articlesDirectory = path.join(process.cwd(), 'articles');
+// const fileNames = fs.readdirSync(articlesDirectory);
+
+// function processContent(content) {
+//     // markdown proessed to HTML, cannots escape characters and other syntax (messy)
+//     const processedContent = await remark()
+//         .use(html)
+//         .process(matterResult.content);
+//     const contentHtml = processedContent.toString();
+//     console.log(processedContent);
+//     // This is the raw HTML you use
+//     console.log(contentHtml);
+// }
+
+export async function generateTocData() {
+    const fullPath = path.join(articlesDirectory, `${id}.mdx`);
+
+    const fileContents = fs.readFileSync(fullPath, 'utf8');
+    // All markdown content from the file as a string.
+    console.log(fileContents);
+    // Markdown content processed by graymatter. There is content and data (frontmatter)
+    const matterResult = matter(fileContents);
+    console.log(matterResult);
+
+    const whatMatterResultLooksLike = {
+        content:
+            '\n' +
+            'Intro Article\n' +
+            '\n' +
+            '## Test\n' +
+            'xpand Emmet to Mithril xpand Emmet to Mithrilxpand Emmet to Mithrilxpand Emmet to Mithrilxpand Emmet to Mithrilxpand Emmet to Mithrilxpand Emmet to Mithrilxpand Emmet to Mithrilxpand Emmet to Mithrilxpand Emmet to Mithrilxpand Emmet to \n' +
+            '\n' +
+            '## Test\n',
+        data: { title: 'Intro Article', date: '2020-01-02' },
+        isEmpty: false,
+        excerpt: '',
+    };
+
+    // this is the front matter as an object { title: 'Intro Article', date: '2020-01-02' }
+    console.log(matterResult.data);
+    // markdown proessed to HTML, cannots escape characters and other syntax (messy)
+    const processedContent = await remark()
+        .use(html)
+        .process(matterResult.content);
+    const contentHtml = processedContent.toString();
+    console.log(processedContent);
+    // This is the raw HTML you use
+    console.log(contentHtml);
+
+    return {
+        id,
+        contentHtml,
+        ...matterResult.data,
+    };
+}
+
+```
