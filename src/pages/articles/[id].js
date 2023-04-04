@@ -66,10 +66,14 @@ export default function Article({
     );
 }
 
+// When you export a function called getStaticPaths (Static Site Generation) from a page that uses dynamic routes, Next.js will statically pre-render all the paths specified by getStaticPaths.
+// `getStaticPaths` requires using `getStaticProps`
+
 export async function getStaticPaths() {
     const paths = getAllArticleIds();
 
-    // Paths looks like this (not used), array of objects
+    // Paths is an array of objects that specifies the paths that are pre-rendered by NextJs
+    // The content of each path that is generated wrapped is wrapped in the Page component
 
     // const paths = [
     //     { params: { id: '.DS_Store' } },
@@ -77,8 +81,16 @@ export async function getStaticPaths() {
     //     { params: { id: 'article-2' } },
     //     { params: { id: 'intro' } },
     // ];
-
+    console.log(
+        '*******************************getStaticPaths******************************'
+    );
+    console.log('');
+    console.log('$paths:');
     console.log(paths);
+    console.log('');
+    console.log(
+        '***************************************************************************'
+    );
     return {
         paths,
         // We’re setting the fallback property in our return statement to false so that any paths not included in our paths list will result in a 404 page
@@ -87,42 +99,118 @@ export async function getStaticPaths() {
 }
 
 // The getStaticProps method fetches data at build time. When we build our app, Next.js is going to run the getStaticProps method, take the data from it, pass it to our component as props, and then use that to generate the page.
+// If you export a function called getStaticProps (Static Site Generation) from a page, Next.js will pre-render this page at build time using the props returned by getStaticProps.
 
 export async function getStaticProps({ params }) {
-    // take a params object that contains an ID
-    // save articles path to variable
     const articlesDirectory = path.join(process.cwd(), 'articles');
-    // create a full path to the mdx file by combining the directory with the
-    // MDX file that has the specificed ID -- includes file extension (required for readFileSync)
     const fullPath = path.join(articlesDirectory, `${params.id}.mdx`);
-    // readFileSync- get the data in our individual file using the file full path.
     const markdownWithMeta = fs.readFileSync(fullPath, 'utf8');
-    // ‘gray-matter’ to get our post’s front matter. It separates the frontmatter from the content
-    const [frontMatter, content] = matter(markdownWithMeta);
-
-    // *****************
-    // USED FOR TOC ONLY
-    // - This function This content is used later to generate TOC entries based on Ids in the raw HTML returned by this function.
-    // processedContent - markdown proessed to HTML, contains escape characters and other syntax (messy)
-    const processedContent = await remark()
-        .use(html)
-        .process(matterResult.content);
+    const { data: frontMatter, content } = matter(markdownWithMeta);
+    const processedContent = await remark().use(html).process(content);
     const contentHtml = processedContent.toString();
-    // We’re using the serialize method to parse and compile the MDX string so that it can be rendered in our app. You are serializing the content, and not the frontMatter
+    const mdxSource = await serialize(content);
 
-    // *****************
-
-    const mdxSource = await serialize(matterResult.content);
-
+    console.log(
+        '*******************************getStaticProps******************************'
+    );
+    console.log('');
+    console.log(
+        '$params - The object containing the ID that was passed as a prop to this function (unsure how):'
+    );
+    console.log('');
+    console.log(params);
+    console.log('');
+    console.log(
+        '***************************************************************************'
+    );
+    console.log('');
+    console.log('$params.id - This the value of the ID key:');
+    console.log('');
+    console.log(params.id);
+    console.log('');
+    console.log(
+        '***************************************************************************'
+    );
+    console.log('');
+    console.log('$articlesDirectory - save articles path to variable:');
+    console.log('');
     console.log(articlesDirectory);
+    console.log('');
+    console.log(
+        '***************************************************************************'
+    );
+    console.log('');
+    console.log(
+        '$fullPath - create a full path to the mdx file by combining the directory with the MDX file that has the specificed ID -- includes file extension (required for readFileSync)'
+    );
+    console.log('');
+    console.log(fullPath);
+    console.log('');
+    console.log(
+        '***************************************************************************'
+    );
+    console.log('');
+    console.log('$markdownWithMeta - gray-matter formatted content:');
+    console.log('');
+
     console.log(markdownWithMeta);
+    console.log('');
+    console.log(
+        '***************************************************************************'
+    );
+    console.log('');
+    console.log(
+        '$frontMatter - gray-matter gets our post’s front matter. It separates the frontmatter from the content'
+    );
+    console.log('');
     console.log(frontMatter);
+    console.log('');
+    console.log(
+        '***************************************************************************'
+    );
+    console.log('');
+    console.log(
+        '$content - gray-matter gets our post’s content. It separates the frontmatter from the content'
+    );
+    console.log('');
     console.log(content);
+    console.log('');
+    console.log(
+        '***************************************************************************'
+    );
+    console.log('');
+    console.log(
+        '$processedContent - TOC Only Purpose: Remark converts markdown to HTML. It contains escape characters and other syntax (messy). It needs to be pro '
+    );
+    console.log('');
     console.log(processedContent);
+    console.log('');
+    console.log(
+        '***************************************************************************'
+    );
+    console.log('');
+    console.log(
+        '$contentHtml - TOC Only Purpose: Only RAW HTML content with no wrapping object or escape characters. This content is used later to generate TOC entries based on Ids within the raw HTML returned by this function.'
+    );
+    console.log('');
     console.log(contentHtml);
+    console.log('');
+    console.log(
+        '***************************************************************************'
+    );
+    console.log('');
+    console.log(
+        '$mdxSource- Serialize method to parse and compile the MDX string so that it can be rendered in our app. You are serializing the content, and not the frontMatter'
+    );
+    console.log('');
     console.log(mdxSource);
+    console.log('');
+    console.log(
+        '***************************************************************************'
+    );
 
     return {
+        // Passed to the page component as props
         props: {
             frontMatter,
             mdxSource,
