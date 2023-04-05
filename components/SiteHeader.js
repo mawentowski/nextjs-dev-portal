@@ -62,6 +62,12 @@ function SiteHeader() {
                             href="/posts"
                             className="bg-transparent border-0 font-medium  hover:text-bluedark ml-4 mr-8 my-0 text-sm text-textprimary"
                         >
+                            API Reference
+                        </Link>
+                        <Link
+                            href="/posts"
+                            className="bg-transparent border-0 font-medium  hover:text-bluedark ml-4 mr-8 my-0 text-sm text-textprimary"
+                        >
                             Blog
                         </Link>
                     </nav>
@@ -176,7 +182,7 @@ const VersionSelector = () => {
             className={clsx(
                 'bg-graylight border-none font-normal inline-block  px-2 py-1 relative rounded-3xl text-sm xs:ml-0 ml-3',
                 {
-                    ['hover:bg-graymedium']: open === 'open',
+                    ['hover:bg-graymedium']: open === true,
                 }
             )}
         >

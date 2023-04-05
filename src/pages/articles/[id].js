@@ -16,6 +16,7 @@ import matter from 'gray-matter';
 import MDXComponents from '../../../components/MDXComponents';
 import { remark } from 'remark';
 import html from 'remark-html';
+import modifyHtmlString from '../../../components/ModifyHtmlString';
 // https://blog.jetbrains.com/webstorm/2021/10/building-a-blog-with-next-js-and-mdx/#GettingourPostPagepropswithgetStaticProps
 
 // Each page is associated with a route based on its file name.
@@ -26,8 +27,6 @@ export default function Article({
     htmlString,
     mdxSource,
 }) {
-    // console.log(`This is Button plain: ${ButtonPlain}`);
-
     return (
         <Layout>
             <main

@@ -1,4 +1,11 @@
 import Link from 'next/link';
+import { useState } from 'react';
+import clsx from 'clsx';
+import { useEffect, useRef } from 'react';
+
+// smooth scroll and possibly margin solution
+// https://nikitahl.com/smooth-scroll-to-anchor
+// https://www.youtube.com/watch?v=bms_e55PtmE&t=2s
 
 function ArticleToc(props) {
     const getHeadings = (source) => {
@@ -12,29 +19,6 @@ function ArticleToc(props) {
 
                 const link = '#' + headingText.replace(/ /g, '_').toLowerCase();
 
-                console.log(
-                    '***************************************************************************'
-                );
-                console.log('');
-                console.log('$headingText:');
-                console.log('');
-                console.log(headingText);
-                console.log('');
-                console.log(
-                    '***************************************************************************'
-                );
-                console.log(
-                    '***************************************************************************'
-                );
-                console.log('');
-                console.log('$clink:');
-                console.log('');
-                console.log(link);
-                console.log('');
-                console.log(
-                    '***************************************************************************'
-                );
-
                 return {
                     text: headingText,
                     link,
@@ -44,23 +28,19 @@ function ArticleToc(props) {
 
         return [];
     };
-
     const headings = getHeadings(props.htmlContainingHeadings);
 
-    console.log(
-        '***************************************************************************'
-    );
-    console.log('');
-    console.log('$props.htmlContainingHeadings:');
-    console.log('');
-    console.log(props.htmlContainingHeadings);
-    console.log('');
-    console.log(
-        '***************************************************************************'
-    );
-    console.log(
-        '***************************************************************************'
-    );
+    const [activeLink, setActiveLink] = useState('');
+
+    function toggleActiveLink(source) {
+        console.log('source:');
+        console.log(source);
+        console.log('activeLink:');
+        console.log(activeLink);
+        if (source !== activeLink) {
+            setActiveLink(source);
+        }
+    }
 
     return (
         <div
@@ -80,8 +60,16 @@ function ArticleToc(props) {
                                 className="text-sm list-none"
                             >
                                 <Link
+                                    onClick={(e) =>
+                                        toggleActiveLink(heading.text)
+                                    }
                                     href={heading.link}
-                                    className="hover:text-textaccent text-left text-textprimary"
+                                    className={clsx('text-left', {
+                                        ['text-bluedark']:
+                                            activeLink === heading.text,
+                                        ['hover:text-textaccent text-textprimary']:
+                                            activeLink !== heading.text,
+                                    })}
                                 >
                                     {heading.text}
                                 </Link>
@@ -89,23 +77,6 @@ function ArticleToc(props) {
                         ))}
                     </ul>
                 ) : null}
-
-                {/* <li className="text-sm list-none">
-                    <Link
-                        href="/"
-                        className="hover:text-textaccent text-left text-textprimary"
-                    >
-                        Lorem ipsum, dolor
-                    </Link>
-                </li>
-                <li className="text-sm list-none">
-                    <Link
-                        href="/"
-                        className="hover:text-textaccent text-left text-textprimary"
-                    >
-                        Lorem ipsum, dolor
-                    </Link>
-                </li> */}
             </nav>
         </div>
     );

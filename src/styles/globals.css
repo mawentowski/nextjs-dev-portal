@@ -92,16 +92,38 @@ h1 {
 h2 {
     font-size: 1.625rem;
     line-height: 2rem;
-    margin-bottom: 1.5rem;
+
     /* margin-top: 3rem; */
 }
 
-h3 {
-    font-size: 1.375rem;
-    line-height: 1.75rem;
-    margin-bottom: 1.25rem;
-    margin-top: 2.5rem;
+h2 {
+    padding-top: 3rem;
+    margin-top: 3rem;
+    border-color: #f3f4f6;
+    border-top-width: 1px;
+    font-weight: 600;
+    font-size: 0.875rem;
+    color: #3b82f6;
 }
+
+h2:nth-of-type(1) {
+    margin-top: 0;
+    border: none;
+}
+/* p {
+    margin-bottom: 3.5rem;
+} */
+
+h3 {
+    font-weight: 600;
+    font-size: 1.25em;
+    margin-bottom: 0.6em;
+    line-height: 1.4;
+}
+
+/* h3 {
+    font-size: 1.375rem;
+} */
 
 h4 {
     font-size: 1.115rem;
@@ -293,7 +315,7 @@ video {
 /* TABLES */
 /* ********************************/
 
-table.main-table {
+table {
     width: 100%;
     /* table-layout: fixed; */
     word-wrap: break-word;
@@ -304,33 +326,40 @@ table.main-table {
     color: rgb(51, 65, 85);
 }
 
-.main-table tbody {
+tbody {
     border: 1px solid #e3e8ed;
     border-radius: 6px;
 }
 
-.main-table tr {
+tr {
     border-bottom: 1px solid #e3e8ed;
     border-radius: 4px;
 }
 
-.main-table th {
+th {
     padding: 0 16px 8px;
-    font-weight: 400;
+    font-weight: 600;
     color: rgb(105 115 134);
-    text-transform: uppercase;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    color: #334155;
+    /* text-transform: uppercase; */
 }
 
-.main-table td {
+td {
     padding: 14px;
 }
 
-.main-table td:nth-of-type(1) {
+td:nth-of-type(1) {
     font-weight: 500;
 }
 
-.main-table tr:nth-of-type(2n) {
+tr:nth-of-type(2n) {
     background-color: #f7fafc;
+}
+
+tfoot {
+    display: none;
 }
 
 /* ********************************/
@@ -501,8 +530,7 @@ main.article {
 
 /* Remove default margin */
 body,
-h1,
-h2,
+/* h1,
 h3,
 h4,
 p,
@@ -511,7 +539,7 @@ blockquote,
 dl,
 dd {
     margin: 0;
-}
+} */
 
 /* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
 ul[role='list'],
@@ -690,26 +718,3 @@ a {
 #subnav {
     border-bottom: 0.5px;
 }
-
-/* h2 {
-    padding-top: 3.5rem;
-
-border-color: #F3F4F6;
-border-top-width: 1px;
-font-weight: 600;
-font-size: .875rem;
-color: #334155;
-}
-
-p {
-    margin-bottom: 3.5rem;
-}
-
-h3 {
-    
-font-weight: 600;
-font-size: 1.25em;
-margin-top: 2.4em;
-margin-bottom: .6em;
-line-height: 1.4;
-} */
