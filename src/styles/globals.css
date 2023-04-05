@@ -93,7 +93,7 @@ h2 {
     font-size: 1.625rem;
     line-height: 2rem;
     margin-bottom: 1.5rem;
-    margin-top: 3rem;
+    /* margin-top: 3rem; */
 }
 
 h3 {
@@ -690,3 +690,26 @@ a {
 #subnav {
     border-bottom: 0.5px;
 }
+
+/* h2 {
+    padding-top: 3.5rem;
+
+border-color: #F3F4F6;
+border-top-width: 1px;
+font-weight: 600;
+font-size: .875rem;
+color: #334155;
+}
+
+p {
+    margin-bottom: 3.5rem;
+}
+
+h3 {
+    
+font-weight: 600;
+font-size: 1.25em;
+margin-top: 2.4em;
+margin-bottom: .6em;
+line-height: 1.4;
+} */

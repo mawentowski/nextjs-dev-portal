@@ -23,7 +23,7 @@ import html from 'remark-html';
 
 export default function Article({
     frontMatter: { title, summary },
-    contentHtml,
+    htmlString,
     mdxSource,
 }) {
     // console.log(`This is Button plain: ${ButtonPlain}`);
@@ -47,7 +47,7 @@ export default function Article({
                         </div>
                     </nav>
 
-                    <ArticleToc />
+                    <ArticleToc htmlContainingHeadings={htmlString} />
 
                     {/* We’ll use MDXRemote to consume the output of serialize, so that we can render it directly into the PostPage component. The MDXRemote component also has an optional components prop, which we’ll be using to supply components to our MDX files. */}
 
@@ -109,7 +109,7 @@ export async function getStaticProps({ params }) {
     const markdownWithMeta = fs.readFileSync(fullPath, 'utf8');
     const { data: frontMatter, content } = matter(markdownWithMeta);
     const processedContent = await remark().use(html).process(content);
-    const contentHtml = processedContent.toString();
+    const htmlString = processedContent.toString();
     const mdxSource = await serialize(content);
 
     console.log(
@@ -192,10 +192,10 @@ export async function getStaticProps({ params }) {
     );
     console.log('');
     console.log(
-        '$contentHtml - TOC Only Purpose: Only RAW HTML content with no wrapping object or escape characters. This content is used later to generate TOC entries based on Ids within the raw HTML returned by this function.'
+        '$htmlString - TOC Only Purpose: Only RAW HTML content with no wrapping object or escape characters. This content is used later to generate TOC entries based on Ids within the raw HTML returned by this function.'
     );
     console.log('');
-    console.log(contentHtml);
+    console.log(htmlString);
     console.log('');
     console.log(
         '***************************************************************************'
@@ -215,7 +215,7 @@ export async function getStaticProps({ params }) {
         // Passed to the page component as props
         props: {
             // string
-            contentHtml,
+            htmlString,
             // object
             frontMatter,
             // serialized MDX data
