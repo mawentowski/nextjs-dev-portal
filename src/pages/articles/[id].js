@@ -38,7 +38,7 @@ export default function Article({
 
                 <main
                     id="article"
-                    className="grid order-1 md:pr-6 xl:pr-0 md:col-span-2 xl:col-span-3 xl:grid-cols-3 w-3/4"
+                    className="grid order-1 md:pr-6 xl:pr-0 md:col-span-2 xl:col-span-3 xl:grid-cols-3 md:w-3/4"
                 >
                     <nav id="article-header" className="xl:col-span-2">
                         <div className="font-semibold mb-2 text-sm 2">
