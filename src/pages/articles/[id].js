@@ -31,13 +31,14 @@ export default function Article({
         <Layout>
             <main
                 id="main-container"
-                className="w-full grid gap-6 mx-auto max-w-screen-xl px-6 md:px-0 md:grid-cols-3 xl:grid-cols-4  "
+                className="w-full gap-6 mx-auto max-w-screen-xl px-6 md:px-0 
+                flex "
             >
                 <SideBar />
 
                 <main
                     id="article"
-                    className="grid order-1 md:pr-6 xl:pr-0 md:col-span-2 xl:col-span-3 xl:grid-cols-3"
+                    className="grid order-1 md:pr-6 xl:pr-0 md:col-span-2 xl:col-span-3 xl:grid-cols-3 w-3/4"
                 >
                     <nav id="article-header" className="xl:col-span-2">
                         <div className="font-semibold mb-2 text-sm 2">
