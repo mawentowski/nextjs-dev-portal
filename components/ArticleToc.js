@@ -8,6 +8,8 @@ import { useEffect, useRef } from 'react';
 // https://www.youtube.com/watch?v=bms_e55PtmE&t=2s
 
 function ArticleToc(props) {
+    // Generate TOC links using source HTML and regex
+
     const getHeadings = (source) => {
         const regex = /<h2>(.*?)<\/h2>/g;
 
@@ -30,13 +32,11 @@ function ArticleToc(props) {
     };
     const headings = getHeadings(props.htmlContainingHeadings);
 
+    // Manage state of links to apply styling
+
     const [activeLink, setActiveLink] = useState('');
 
     function toggleActiveLink(source) {
-        console.log('source:');
-        console.log(source);
-        console.log('activeLink:');
-        console.log(activeLink);
         if (source !== activeLink) {
             setActiveLink(source);
         }
@@ -45,7 +45,7 @@ function ArticleToc(props) {
     return (
         <div
             id="article-toc"
-            className="flex xl:overflow-y-auto xl:px-8 xl:right-0 xl:sticky xl:top-14 xl:w-72 xl:z-20"
+            className="flex xl:overflow-y-auto xl:px-8 xl:right-0 xl:sticky xl:top-14 xl:w-72  xl:col-span-1 xl:z-20 xl:row-span-2"
         >
             <nav className="mt-6">
                 <div className="separator mb-3 text-sm font-medium">

@@ -31,13 +31,16 @@ export default function Article({
         <Layout>
             <main
                 id="main-container"
-                className="w-full grid gap-6 mx-auto max-w-screen-xl px-6 md:px-0"
+                className="w-full grid gap-6 mx-auto max-w-screen-xl px-6 md:px-0 md:grid-cols-3 xl:grid-cols-4  "
             >
                 <SideBar />
 
-                <main id="article" className="grid order-1 md:pr-6 xl:pr-0">
-                    <nav id="article-header">
-                        <div className="font-semibold mb-2 text-sm">
+                <main
+                    id="article"
+                    className="grid order-1 md:pr-6 xl:pr-0 md:col-span-2 xl:col-span-3 xl:grid-cols-3"
+                >
+                    <nav id="article-header" className="xl:col-span-2">
+                        <div className="font-semibold mb-2 text-sm 2">
                             <h5 className="text-bluedark">Separator</h5>
                         </div>
                         <div>
@@ -50,7 +53,7 @@ export default function Article({
 
                     {/* We’ll use MDXRemote to consume the output of serialize, so that we can render it directly into the PostPage component. The MDXRemote component also has an optional components prop, which we’ll be using to supply components to our MDX files. */}
 
-                    <div id="article-content">
+                    <div id="article-content" className="xl:col-span-2">
                         <MDXRemote {...mdxSource} components={MDXComponents} />
                     </div>
 

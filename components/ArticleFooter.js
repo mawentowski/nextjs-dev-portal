@@ -1,6 +1,6 @@
 function ArticleFooter({ children }) {
     return (
-        <div id="article-footer">
+        <div id="article-footer" className="xl:col-span-2">
             <h1>Footer</h1>
             {children}
             <p>
