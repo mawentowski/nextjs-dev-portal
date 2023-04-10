@@ -31,6 +31,7 @@ function ArticleToc(props) {
         return [];
     };
     const headings = getHeadings(props.htmlContainingHeadings);
+    console.log(headings);
 
     // Manage state of links to apply styling
 

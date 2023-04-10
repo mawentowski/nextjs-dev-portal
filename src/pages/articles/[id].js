@@ -1,7 +1,7 @@
 // import Date from '../../../components/dates';
 // import Head from 'next/head';
 import ArticleFooter from '../../../components/articlefooter';
-import ArticleToc from '../../../components/ArticleToc';
+// import ArticleToc from '../../../components/ArticleToc';
 import Layout from '../../../components/layout';
 import Link from 'next/link';
 
@@ -17,16 +17,64 @@ import MDXComponents from '../../../components/MDXComponents';
 import { remark } from 'remark';
 import html from 'remark-html';
 import modifyHtmlString from '../../../components/ModifyHtmlString';
+import ScrollSpy from 'react-scrollspy-navigation';
+
+import { useState } from 'react';
+import clsx from 'clsx';
+
+// https://mdbootstrap.com/docs/react/navigation/scrollspy/#example-4
+
 // https://blog.jetbrains.com/webstorm/2021/10/building-a-blog-with-next-js-and-mdx/#GettingourPostPagepropswithgetStaticProps
 
 // Each page is associated with a route based on its file name.
 // The default is Defining routes by using predefined paths
 
+// vanilla scrollspy
+// https://www.youtube.com/watch?v=fAAk9CATILc&t=28s
+
+// scroll margin:
+// https://nikitahl.com/smooth-scroll-to-anchor
+
 export default function Article({
-    frontMatter: { title, summary },
+    frontMatter: { title, summary, tocEnabled },
     htmlString,
     mdxSource,
 }) {
+    // Generate TOC links using source HTML and regex
+
+    const getHeadings = (source) => {
+        const regex = /<h2>(.*?)<\/h2>/g;
+
+        if (source.match(regex)) {
+            return source.match(regex).map((heading) => {
+                const headingText = heading
+                    .replace('<h2>', '')
+                    .replace('</h2>', '');
+
+                const link = '#' + headingText.replace(/ /g, '_').toLowerCase();
+
+                return {
+                    text: headingText,
+                    link,
+                };
+            });
+        }
+
+        return [];
+    };
+    const headings = getHeadings(htmlString);
+    console.log(headings);
+
+    // Manage state of links to apply styling
+
+    const [activeLink, setActiveLink] = useState('');
+
+    function toggleActiveLink(source) {
+        if (source !== activeLink) {
+            setActiveLink(source);
+        }
+    }
+
     return (
         <Layout>
             <main
@@ -38,7 +86,11 @@ export default function Article({
 
                 <main
                     id="article"
-                    className="grid order-1 md:pr-6 xl:pr-0 md:col-span-2 xl:col-span-3 xl:grid-cols-3 md:w-3/4"
+                    className={`grid order-1 md:pr-6 xl:pr-0 md:col-span-2 xl:col-span-3  md:w-3/4 ${
+                        headings.length == 0 || !tocEnabled
+                            ? 'xl:grid-cols-2'
+                            : 'xl:grid-cols-3'
+                    }`}
                 >
                     <nav id="article-header" className="xl:col-span-2">
                         <div className="font-semibold mb-2 text-sm 2">
@@ -50,7 +102,50 @@ export default function Article({
                         </div>
                     </nav>
 
-                    <ArticleToc htmlContainingHeadings={htmlString} />
+                    <div
+                        id="article-toc"
+                        className={`xl:overflow-y-auto xl:px-8 xl:right-0 xl:sticky xl:top-14 xl:w-72  xl:col-span-1 xl:z-20 xl:row-span-2 ${
+                            headings.length == 0 || !tocEnabled
+                                ? 'hidden'
+                                : 'flex'
+                        }`}
+                    >
+                        <nav className="mt-6">
+                            <div className="separator mb-3 text-sm font-medium">
+                                On this page
+                            </div>
+
+                            {headings.length > 0 ? (
+                                <ul className="mb-6 p-0 text-left">
+                                    {headings.map((heading) => (
+                                        <li
+                                            key={heading.text}
+                                            className="text-sm list-none"
+                                        >
+                                            <Link
+                                                onClick={(e) =>
+                                                    toggleActiveLink(
+                                                        heading.text
+                                                    )
+                                                }
+                                                href={heading.link}
+                                                className={clsx('text-left', {
+                                                    ['text-bluedark']:
+                                                        activeLink ===
+                                                        heading.text,
+                                                    ['hover:text-textaccent text-textprimary']:
+                                                        activeLink !==
+                                                        heading.text,
+                                                })}
+                                            >
+                                                {heading.text}
+                                            </Link>
+                                        </li>
+                                    ))}
+                                </ul>
+                            ) : null}
+                        </nav>
+                    </div>
 
                     {/* We’ll use MDXRemote to consume the output of serialize, so that we can render it directly into the PostPage component. The MDXRemote component also has an optional components prop, which we’ll be using to supply components to our MDX files. */}
 

@@ -792,3 +792,13 @@ xxl: '1400px', */
 aside#sidebar {
     min-width: 19rem;
 }
+
+/* #article-toc {
+    display: none;
+}
+
+@media (min-width: 1200px) {
+    .xl\:grid-cols-3 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+} */
