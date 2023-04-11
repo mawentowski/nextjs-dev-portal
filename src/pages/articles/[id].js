@@ -21,6 +21,7 @@ import ScrollSpy from 'react-scrollspy-navigation';
 
 import { useState } from 'react';
 import clsx from 'clsx';
+import { WithNavMenu } from '../../../components/NavMenu';
 
 // https://mdbootstrap.com/docs/react/navigation/scrollspy/#example-4
 
@@ -34,6 +35,9 @@ import clsx from 'clsx';
 
 // scroll margin:
 // https://nikitahl.com/smooth-scroll-to-anchor
+
+// implemnt own scrollspy
+// https://blog.devgenius.io/diy-scrollspy-4f1c270cafaf
 
 export default function Article({
     frontMatter: { title, summary, tocEnabled },
@@ -102,7 +106,7 @@ export default function Article({
                         </div>
                     </nav>
 
-                    <div
+                    {/* <div
                         id="article-toc"
                         className={`xl:overflow-y-auto xl:px-8 xl:right-0 xl:sticky xl:top-14 xl:w-72  xl:col-span-1 xl:z-20 xl:row-span-2 ${
                             headings.length == 0 || !tocEnabled
@@ -145,12 +149,21 @@ export default function Article({
                                 </ul>
                             ) : null}
                         </nav>
-                    </div>
+                    </div> */}
 
                     {/* We’ll use MDXRemote to consume the output of serialize, so that we can render it directly into the PostPage component. The MDXRemote component also has an optional components prop, which we’ll be using to supply components to our MDX files. */}
 
                     <div id="article-content" className="xl:col-span-2">
-                        <MDXRemote {...mdxSource} components={MDXComponents} />
+                        <WithNavMenu
+                            selector="h2"
+                            headings={headings}
+                            tocEnabled={tocEnabled}
+                        >
+                            <MDXRemote
+                                {...mdxSource}
+                                components={MDXComponents}
+                            />
+                        </WithNavMenu>
                     </div>
 
                     {/* LEFT OFF HERE!!!! */}

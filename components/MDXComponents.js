@@ -3,9 +3,15 @@ import ButtonPlain from './ui/buttonplain';
 import Image from 'next/image';
 
 const Heading2 = ({ children }) => {
+    console.log(children);
     const idText = children.replace(/ /g, '_').toLowerCase();
+    const modifiedIdText = `${idText}`;
 
-    return <h2 id={idText}>{children}</h2>;
+    return (
+        <h2 id={modifiedIdText} data-nav-title={children} data-scrollspy>
+            {children}
+        </h2>
+    );
 };
 
 const ResponsiveImage = (props) => (
