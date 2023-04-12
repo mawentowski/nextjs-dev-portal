@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import ButtonPlain from './ui/buttonplain';
-import PageNav from './pagenav';
+import PageNav from './Pagenav';
 import { useState } from 'react';
 import clsx from 'clsx';
 import { useEffect, useRef } from 'react';

@@ -6,7 +6,7 @@
 // import MainBody from '../../components/MainBody'
 // import MainBody from '../../components/MainBody';
 // import Global from '../../components/layouts/layout';
-import Layout from '../../components/layout';
+import Layout from '../../components/Layout';
 
 export default function Home() {
     return (

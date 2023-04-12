@@ -1,11 +1,9 @@
 // import Date from '../../../components/dates';
 // import Head from 'next/head';
-import ArticleFooter from '../../../components/articlefooter';
+// import ArticleFooter from '../../../components/articlefooter';
 // import ArticleToc from '../../../components/ArticleToc';
-import Layout from '../../../components/layout';
+import Layout from '../../../components/Layout';
 import Link from 'next/link';
-
-import SideBar from '../../../components/sidebar';
 import getAllArticleIds from '../../../lib/articles';
 import { MDXRemote } from 'next-mdx-remote';
 import ButtonPlain from '../../../components/ui/buttonplain';
@@ -16,13 +14,13 @@ import matter from 'gray-matter';
 import MDXComponents from '../../../components/MDXComponents';
 import { remark } from 'remark';
 import html from 'remark-html';
-import modifyHtmlString from '../../../components/ModifyHtmlString';
-import ScrollSpy from 'react-scrollspy-navigation';
+// import modifyHtmlString from '../../../components/ModifyHtmlString';
 
-import { useState } from 'react';
-import clsx from 'clsx';
-import { WithNavMenu } from '../../../components/NavMenu';
+// import clsx from 'clsx';
+// import { WithNavMenu } from '../../../components/NavMenu';
 
+import { useState, useRef, useLayoutEffect, useEffect } from 'react';
+// import { ScrollSpy } from './ScrollSpy';
 // https://mdbootstrap.com/docs/react/navigation/scrollspy/#example-4
 
 // https://blog.jetbrains.com/webstorm/2021/10/building-a-blog-with-next-js-and-mdx/#GettingourPostPagepropswithgetStaticProps
@@ -79,6 +77,47 @@ export default function Article({
         }
     }
 
+    // ***************************************************
+    // Was in NavMenu.js File
+    // ***************************************************
+    // Was WithNavMenu
+    const [options, setOptions] = useState([]);
+    const selector = 'h2';
+    useLayoutEffect(() => {
+        const navMenuSections = document.querySelectorAll(selector);
+        const optionsFromSections = Array.from(navMenuSections).map(
+            (section) => {
+                console.log(`The typeof section is: ${typeof section}`);
+                console.log(section);
+                return {
+                    section,
+                    hash: section.id,
+                    title: section.dataset.navTitle,
+                };
+            }
+        );
+        setOptions(optionsFromSections);
+    }, [selector]);
+
+    // ***************************************************
+    // Was in NavMenu.js File
+    // ***************************************************
+    // Was NavMenu
+
+    const onClick = (event, option) => {
+        event.preventDefault();
+        // Set the hash
+        window.location.hash = event.target.hash;
+        console.log(`The event is:`);
+        console.log(event);
+        console.log(`The option is:`);
+        console.log(option);
+        const targetSection = option.section;
+        console.log(`The target section is:`);
+        console.log(targetSection);
+        window.scrollTo(0, targetSection.offsetTop + 1);
+    };
+
     return (
         <Layout>
             <main
@@ -86,7 +125,94 @@ export default function Article({
                 className="w-full gap-6 mx-auto max-w-screen-xl px-6 md:px-0 
                 flex "
             >
-                <SideBar />
+                <aside
+                    id="sidebar"
+                    className=" text-sm  hidden md:block bg-white w-3/12"
+                >
+                    <div
+                        id="sidebar-links-container"
+                        className="-ml-1 block overflow-y-auto pb-8 pt-0 px-7 sticky top-14 z-10 md:col-span-1"
+                    >
+                        <div className="z-20 top-0 sticky md:block">
+                            <div className="bg-white h-6"></div>
+
+                            <div className="bg-white border border-graymedium cursor-pointer flex hover:border-graydark hover:border-opacity-30 items-center px-3 py-2 rounded-lg">
+                                <svg
+                                    className="fill-graydark h-4 w-4 opacity-40"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 512 512"
+                                >
+                                    <path d="M500.3 443.7l-119.7-119.7c27.22-40.41 40.65-90.9 33.46-144.7C401.8 87.79 326.8 13.32 235.2 1.723C99.01-15.51-15.51 99.01 1.724 235.2c11.6 91.64 86.08 166.7 177.6 178.9c53.8 7.189 104.3-6.236 144.7-33.46l119.7 119.7c15.62 15.62 40.95 15.62 56.57 0C515.9 484.7 515.9 459.3 500.3 443.7zM79.1 208c0-70.58 57.42-128 128-128s128 57.42 128 128c0 70.58-57.42 128-128 128S79.1 278.6 79.1 208z"></path>
+                                </svg>
+                                <span className="flex-grow ml-3 text-sm opacity-40">
+                                    Quick Search...
+                                </span>
+
+                                <div
+                                    id="search-append"
+                                    className="border rounded px-1"
+                                >
+                                    <span className="opacity-20">/</span>
+                                </div>
+                            </div>
+                            <div className="bg-gradient-to-b from-white h-8"></div>
+                        </div>
+                        <nav className="md:block hidden">
+                            <div className=" mb-3 text-sm font-medium">
+                                Separator
+                            </div>
+                            {/* Look into looping through these */}
+                            <ul className="border-l-2 p-0 border-l-graylight mb-4">
+                                <li className="border-transparent hover:border-graydark border-l list-none relative hover:border-opacity-75 ">
+                                    <ButtonPlain className="text-left hover:text-textaccen">
+                                        Lorem ipsum, dolor
+                                    </ButtonPlain>
+                                </li>
+                                <li className="border-transparent hover:border-graydark border-l list-none relative hover:border-opacity-75">
+                                    <ButtonPlain className="text-left hover:text-textaccent">
+                                        Lorem ipsum, dolor
+                                    </ButtonPlain>
+                                </li>
+                                <li className="border-transparent hover:border-graydark border-l list-none relative hover:border-opacity-75">
+                                    <ButtonPlain className="text-left hover:text-textaccent">
+                                        Lorem ipsum, dolor
+                                    </ButtonPlain>
+                                </li>
+                                <li className="border-transparent hover:border-graydark border-l list-none relative hover:border-opacity-75">
+                                    <ButtonPlain className="text-left hover:text-textaccent">
+                                        Lorem ipsum, dolor
+                                    </ButtonPlain>
+                                </li>
+                            </ul>
+                            <div className=" mb-3  text-sm font-medium">
+                                Separator
+                            </div>
+                            {/* Look into looping through these */}
+                            <ul className="border-l-2 p-0 border-l-graylight mb-4">
+                                <li className="border-transparent hover:border-graydark border-l list-none relative hover:border-opacity-75">
+                                    <ButtonPlain className="text-left hover:text-textaccent">
+                                        Lorem ipsum, dolor
+                                    </ButtonPlain>
+                                </li>
+                                <li className="border-transparent hover:border-graydark border-l list-none relative hover:border-opacity-75">
+                                    <ButtonPlain className="text-left hover:text-textaccent">
+                                        Lorem ipsum, dolor
+                                    </ButtonPlain>
+                                </li>
+                                <li className="border-transparent hover:border-graydark border-l list-none relative hover:border-opacity-75">
+                                    <ButtonPlain className="text-left hover:text-textaccent">
+                                        Lorem ipsum, dolor
+                                    </ButtonPlain>
+                                </li>
+                                <li className="border-transparent hover:border-graydark border-l list-none relative hover:border-opacity-75">
+                                    <ButtonPlain className="text-left hover:text-textaccent">
+                                        Lorem ipsum, dolor
+                                    </ButtonPlain>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </aside>
 
                 <main
                     id="article"
@@ -106,67 +232,48 @@ export default function Article({
                         </div>
                     </nav>
 
-                    {/* <div
+                    <ScrollSpy handleScroll={onScrollUpdate} />
+                    <div
                         id="article-toc"
-                        className={`xl:overflow-y-auto xl:px-8 xl:right-0 xl:sticky xl:top-14 xl:w-72  xl:col-span-1 xl:z-20 xl:row-span-2 ${
+                        className={`xl:overflow-y-auto xl:px-8 xl:right-0 xl:sticky xl:top-14 xl:w-72  xl:col-span-1 xl:z-20 xl:row-span-2 sticky top-0 ${
                             headings.length == 0 || !tocEnabled
                                 ? 'hidden'
                                 : 'flex'
                         }`}
+
+                        // <div className="relative">
                     >
                         <nav className="mt-6">
                             <div className="separator mb-3 text-sm font-medium">
                                 On this page
                             </div>
 
-                            {headings.length > 0 ? (
-                                <ul className="mb-6 p-0 text-left">
-                                    {headings.map((heading) => (
-                                        <li
-                                            key={heading.text}
-                                            className="text-sm list-none"
+                            <ul className="mb-6 p-0 text-left">
+                                {options.map((option) => (
+                                    <li key={option.hash}>
+                                        {console.log('The option is:')}
+                                        {console.log(option)}
+                                        <a
+                                            href={`#${option.hash}`}
+                                            onClick={(event) =>
+                                                onClick(event, option)
+                                            }
+                                            data-scrollspy-id={option.hash}
+                                            className="text-textprimary hover:text-textaccent"
                                         >
-                                            <Link
-                                                onClick={(e) =>
-                                                    toggleActiveLink(
-                                                        heading.text
-                                                    )
-                                                }
-                                                href={heading.link}
-                                                className={clsx('text-left', {
-                                                    ['text-bluedark']:
-                                                        activeLink ===
-                                                        heading.text,
-                                                    ['hover:text-textaccent text-textprimary']:
-                                                        activeLink !==
-                                                        heading.text,
-                                                })}
-                                            >
-                                                {heading.text}
-                                            </Link>
-                                        </li>
-                                    ))}
-                                </ul>
-                            ) : null}
+                                            {option.title}
+                                        </a>
+                                    </li>
+                                ))}
+                            </ul>
                         </nav>
-                    </div> */}
-
-                    {/* We’ll use MDXRemote to consume the output of serialize, so that we can render it directly into the PostPage component. The MDXRemote component also has an optional components prop, which we’ll be using to supply components to our MDX files. */}
-
-                    <div id="article-content" className="xl:col-span-2">
-                        <WithNavMenu
-                            selector="h2"
-                            headings={headings}
-                            tocEnabled={tocEnabled}
-                        >
-                            <MDXRemote
-                                {...mdxSource}
-                                components={MDXComponents}
-                            />
-                        </WithNavMenu>
                     </div>
 
-                    {/* LEFT OFF HERE!!!! */}
+                    <div id="article-content" className="xl:col-span-2">
+                        {/* We’ll use MDXRemote to consume the output of serialize, so that we can render it directly into the PostPage component. The MDXRemote component also has an optional components prop, which we’ll be using to supply components to our MDX files. */}
+
+                        <MDXRemote {...mdxSource} components={MDXComponents} />
+                    </div>
 
                     <ArticleFooter>
                         <Link href="/articles">
@@ -334,3 +441,93 @@ export async function getStaticProps({ params }) {
         },
     };
 }
+
+// ***************************************************
+// Was in NavMenu.js File
+// ***************************************************
+const onScrollUpdate = (entry, isInVewPort) => {
+    const { target, boundingClientRect } = entry;
+    const menuItem = document.querySelector(
+        `[data-scrollspy-id="${target.id}"]`
+    );
+    console.log(menuItem);
+    if (boundingClientRect.y <= 0 && isInVewPort) {
+        menuItem.classList.add('active', 'text-blueextradark');
+        menuItem.classList.remove('text-textprimary', 'hover:text-textaccent');
+    } else {
+        if (menuItem.classList.contains('active')) {
+            menuItem.classList.remove('active');
+            menuItem.classList.add('text-textprimary', 'hover:text-textaccent');
+        }
+    }
+};
+
+// ***************************************************
+// Was separate component file
+// ***************************************************
+const ScrollSpy = ({ handleScroll }) => {
+    const isInViewPort = (entry, offset = 0) => {
+        const rect = entry.boundingClientRect;
+        return rect.top - 1 <= 0 + offset && rect.bottom >= 0 + offset;
+    };
+
+    useLayoutEffect(() => {
+        const scrollables = document.querySelectorAll('[data-scrollspy]');
+        for (let scrollable of scrollables) {
+            const observer = new IntersectionObserver(
+                (entries) => {
+                    entries.forEach((entry) => {
+                        handleScroll &&
+                            handleScroll(entry, isInViewPort(entry));
+                    });
+                },
+                {
+                    root: null,
+                    rootMargin: '0px 0px 100% 0px',
+                    threshold: [
+                        0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0,
+                    ],
+                }
+            );
+            observer.observe(scrollable);
+        }
+    }, [handleScroll]);
+
+    return null;
+};
+
+const ArticleFooter = ({ children }) => {
+    return (
+        <div id="article-footer" className="xl:col-span-2">
+            <h1>Footer</h1>
+            {children}
+            <p>
+                dolorum officia laborum quaerat quos facilis aperiam ad soluta
+                commodi modi assumenda alias similique porro, nam vel sit, omnis
+                ipsa doloremque vitae repellat suscipit perspiciatis eaque. Quod
+                minima temporibus facilis perspiciatis in earum, odio nemo
+                adipisci tenetur culpa. Molestiae enim iusto a eius vero laborum
+                obcaecati assumenda nulla officia quos illo, nostrum dicta rem
+                nihil earum esse ea harum cum dolor sunt consequuntur
+                voluptatibus mollitia ipsum qui. Expedita ipsa explicabo ad
+                commodi rerum error voluptatum! Ex quod saepe voluptatem
+                quisquam ullam tempore architecto fuga dignissimos, rem
+                molestiae! Ducimus eveniet, esse natus aut eaque amet sit
+                molestiae deleniti facere odit obcaecati magnam sapiente at
+                dolorem tempore libero doloribus vero nulla deserunt soluta
+                enim. Labore quis deserunt, ex possimus, qui temporibus placeat
+                voluptatum officiis ab accusamus quibusdam cum aperiam repellat?
+                Dicta corrupti totam a sint officiis vel! Dolore,
+                exercitationem. Tempore corrupti voluptates odit soluta eos
+                cumque dignissimos aliquid ratione, ipsum sapiente impedit
+                nesciunt laborum nostrum facilis? Consequatur quos dicta minima
+                voluptas, dolores optio adipisci modi totam inventore eaque, cum
+                cumque reprehenderit impedit earum quibusdam? Ab nemo adipisci
+                quia illum? Alias nam natus omnis quod possimus ratione porro
+                numquam voluptatibus. Nulla distinctio quidem impedit eos
+                dolores sapiente at nihil? Optio, tempore corporis
+                necessitatibus repellendus anim
+            </p>
+        </div>
+    );
+};

@@ -27,3 +27,18 @@ const MDXComponents = {
 };
 
 export default MDXComponents;
+
+// h2 {
+//     padding-top: 3rem;
+//     margin-top: 3rem;
+//     border-color: #f3f4f6;
+//     border-top-width: 1px;
+//     font-weight: 600;
+//     font-size: 0.875rem;
+//     color: #3b82f6;
+// }
+
+// h2:nth-of-type(1) {
+//     margin-top: 0;
+//     border: none;
+// }
