@@ -1,6 +1,9 @@
 import { useState, useRef, useLayoutEffect, useEffect } from 'react';
 import { ScrollSpy } from './ScrollSpy';
 
+// implemnt own scrollspy
+// https://blog.devgenius.io/diy-scrollspy-4f1c270cafaf
+
 // Abstracted from ScrollSpy to allow for easier customizations
 const onScrollUpdate = (entry, isInVewPort) => {
     const { target, boundingClientRect } = entry;
@@ -9,39 +12,17 @@ const onScrollUpdate = (entry, isInVewPort) => {
     );
     console.log(menuItem);
     if (boundingClientRect.y <= 0 && isInVewPort) {
-        menuItem.classList.add('active');
+        menuItem.classList.add('active', 'text-blueextradark');
+        menuItem.classList.remove('text-textprimary', 'hover:text-textaccent');
     } else {
         if (menuItem.classList.contains('active')) {
             menuItem.classList.remove('active');
+            menuItem.classList.add('text-textprimary', 'hover:text-textaccent');
         }
     }
 };
 
 const NavMenu = ({ options, headings, tocEnabled }) => {
-    // control the click event
-    // console.log('###########################');
-    // useEffect(() => {
-    //     const element = ref.current;
-    //     console.log(element);
-    //     console.log(element.id);
-    //   }, []);
-
-    // const sectionRef = useRef('sectionRef - no value');
-    // console.log('###########################');
-    // console.log(`The current value of linkRef is:`);
-    // console.log(linkRef);
-    // console.log('###########################');
-    // console.log(`The current value of linkRef.current is:`);
-    // console.log(linkRef.current);
-    // useEffect(() => {
-    //     console.log('linkRef..', linkRef.current);
-    // });
-
-    // console.log('###########################');
-    // console.log(`The section in HTML is:`);
-    // console.log(options.section);
-    // console.log('###########################');
-
     const onClick = (event, option) => {
         event.preventDefault();
         // Set the hash
@@ -50,37 +31,6 @@ const NavMenu = ({ options, headings, tocEnabled }) => {
         console.log(event);
         console.log(`The option is:`);
         console.log(option);
-
-        // console.log('###########################');
-        // console.log(`The section in HTML is:`);
-        // console.log(options.section);
-        // console.log('###########################');
-        // console.log(`linkRef.current.value is" ${linkRef.current.value}`);
-
-        // clickedLink.current = e;
-        // console.log(`The following is clickedLink.current:`);
-        // console.log(clickedLink);
-        // console.log('###########################');
-        // console.log(`The ID pf clickedLink:`);
-        // console.log(clickedLink.id);
-        // console.log('###########################');
-        // console.log(`e.target.hash is: ${e.target.hash}`);
-        // console.log(`clickedLink.current now is: ${clickedLink.current}`);
-        // clickedLink.current = e.target.hash;
-        // console.log(`clickedLink.current now is: ${clickedLink.current}`);
-        // console.log(`The clickedLink's id is: ${clickedLink.id}`);
-
-        // Scroll to the section + 1 to account for weird bug.
-        // remove the `+1` and click on Section 2 link to see the bug.
-        // #heading_1.1
-        // console.log(`${e.target.hash}`);
-        // const savedVar = e.target.hash;
-
-        // const element = document.getElementById('box');
-
-        // console.log(`${e.target.hash}`);
-        // const targetSection = document.querySelector(`${e.target.hash}`);
-        // console.log(`${targetSection}`);
         const targetSection = option.section;
         console.log(`The target section is:`);
         console.log(targetSection);
@@ -90,7 +40,7 @@ const NavMenu = ({ options, headings, tocEnabled }) => {
     return (
         <div
             id="article-toc"
-            className={`xl:overflow-y-auto xl:px-8 xl:right-0 xl:sticky xl:top-14 xl:w-72  xl:col-span-1 xl:z-20 xl:row-span-2 ${
+            className={`xl:overflow-y-auto xl:px-8 xl:right-0 xl:sticky xl:top-14 xl:w-72  xl:col-span-1 xl:z-20 xl:row-span-2 sticky top-0 ${
                 headings.length == 0 || !tocEnabled ? 'hidden' : 'flex'
             }`}
         >
@@ -108,6 +58,7 @@ const NavMenu = ({ options, headings, tocEnabled }) => {
                                 href={`#${option.hash}`}
                                 onClick={(event) => onClick(event, option)}
                                 data-scrollspy-id={option.hash}
+                                className="text-textprimary hover:text-textaccent"
                             >
                                 {option.title}
                             </a>
@@ -147,7 +98,12 @@ export const WithNavMenu = ({ children, selector, headings, tocEnabled }) => {
                     tocEnabled={tocEnabled}
                 />
             </div>
+
             <div className="flex-1">{children}</div>
+
+            {/* <div id="article-content" className="xl:col-span-2">
+
+            </div> */}
         </div>
     );
 };
