@@ -42,7 +42,65 @@ export default function Article({
     htmlString,
     mdxSource,
 }) {
-    // Generate TOC links using source HTML and regex
+    console.log('######################################');
+    console.log('');
+    console.log();
+    console.log('######################################');
+
+    const [renderedHtmlString, setRenderedHtmlString] = useState();
+
+    const [elementIds, updatedElementIds] = useState([]);
+
+    console.log('The elementIds array');
+    console.log(elementIds);
+    console.log('######################################');
+
+    const updateElementIdsHandler = (elementId) => {
+        updatedElementIds((elementIds) => [...elementIds, elementId]);
+    };
+
+    const [isSectionRendered, setIsSectionRendered] = useState(false);
+
+    // const appendElementToSection = (elementId) => {
+    //     const element = document.querySelector(`#${elementId}`);
+    //     element.parentNode.insertBefore(section, element);
+    //     // move el into wrapper
+    //     section.appendChild(element);
+    // };
+
+    // useEffect(() => {
+    //     if (!isSectionRendered) {
+    //         document.createElement('section');
+    //         element.parentNode.insertBefore(section, element);
+    //         setIsSectionRendered(true);
+    //     }
+    // }, [isSectionRendered]);
+
+    useEffect(() => {
+        updatedElementIds([]);
+        const renderedHtmlString =
+            document.getElementById('article-content').innerHTML;
+        console.log(renderedHtmlString);
+        setRenderedHtmlString(renderedHtmlString);
+        const elementPattern = /<(.*?) id="(.*?)">(.*?)<\/(.*?)>/gm;
+        if (renderedHtmlString.match(elementPattern)) {
+            renderedHtmlString.match(elementPattern).map((element) => {
+                const elementStringArray = element.split(' ');
+                const idAttributeString = elementStringArray[1];
+                const idAttributeStringRemovedBeginning =
+                    idAttributeString.split(/id=(.*?)"/gm);
+                const idAttributeStringRemovedEnd =
+                    idAttributeStringRemovedBeginning[2].split(/"/gm);
+                const elementId = idAttributeStringRemovedEnd[0];
+                // updateElementIdsHandler(elementId);
+                // let element = document.querySelector(`#${elementId}`);
+                // const section = document.querySelector('section');
+                // section.appendChild(element);
+            });
+        }
+    }, [renderedHtmlString]);
+
+    console.log('######################################');
 
     const getHeadings = (source) => {
         const regex = /<h2>(.*?)<\/h2>/g;
