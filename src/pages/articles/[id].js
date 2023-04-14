@@ -42,42 +42,9 @@ export default function Article({
     htmlString,
     mdxSource,
 }) {
-    console.log('######################################');
-    console.log('');
-    console.log();
-    console.log('######################################');
-
     const [renderedHtmlString, setRenderedHtmlString] = useState();
 
-    const [elementIds, updatedElementIds] = useState([]);
-
-    console.log('The elementIds array');
-    console.log(elementIds);
-    console.log('######################################');
-
-    const updateElementIdsHandler = (elementId) => {
-        updatedElementIds((elementIds) => [...elementIds, elementId]);
-    };
-
-    const [isSectionRendered, setIsSectionRendered] = useState(false);
-
-    // const appendElementToSection = (elementId) => {
-    //     const element = document.querySelector(`#${elementId}`);
-    //     element.parentNode.insertBefore(section, element);
-    //     // move el into wrapper
-    //     section.appendChild(element);
-    // };
-
-    // useEffect(() => {
-    //     if (!isSectionRendered) {
-    //         document.createElement('section');
-    //         element.parentNode.insertBefore(section, element);
-    //         setIsSectionRendered(true);
-    //     }
-    // }, [isSectionRendered]);
-
     useEffect(() => {
-        updatedElementIds([]);
         const renderedHtmlString =
             document.getElementById('article-content').innerHTML;
         console.log(renderedHtmlString);
@@ -92,10 +59,22 @@ export default function Article({
                 const idAttributeStringRemovedEnd =
                     idAttributeStringRemovedBeginning[2].split(/"/gm);
                 const elementId = idAttributeStringRemovedEnd[0];
-                // updateElementIdsHandler(elementId);
-                // let element = document.querySelector(`#${elementId}`);
-                // const section = document.querySelector('section');
-                // section.appendChild(element);
+
+                const selectedElement = document.querySelector(
+                    `[id="${elementId}"]`
+                );
+
+                if (document.querySelector('section') == null) {
+                    const section = document.createElement('section');
+                    document
+                        .querySelector(`[id="${elementId}"]`)
+                        .parentNode.insertBefore(section, selectedElement);
+                } else {
+                    const section = document.querySelector('section');
+                    section.append(
+                        document.querySelector(`[id="${elementId}"]`)
+                    );
+                }
             });
         }
     }, [renderedHtmlString]);
