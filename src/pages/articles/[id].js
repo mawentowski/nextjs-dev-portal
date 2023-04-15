@@ -51,29 +51,100 @@ export default function Article({
         setRenderedHtmlString(renderedHtmlString);
         const elementPattern = /<(.*?) id="(.*?)">(.*?)<\/(.*?)>/gm;
         if (renderedHtmlString.match(elementPattern)) {
-            renderedHtmlString.match(elementPattern).map((element) => {
-                const elementStringArray = element.split(' ');
-                const idAttributeString = elementStringArray[1];
-                const idAttributeStringRemovedBeginning =
-                    idAttributeString.split(/id=(.*?)"/gm);
-                const idAttributeStringRemovedEnd =
-                    idAttributeStringRemovedBeginning[2].split(/"/gm);
-                const elementId = idAttributeStringRemovedEnd[0];
-
-                const selectedElement = document.querySelector(
-                    `[id="${elementId}"]`
-                );
-
-                if (document.querySelector('section') == null) {
-                    const section = document.createElement('section');
-                    document
-                        .querySelector(`[id="${elementId}"]`)
-                        .parentNode.insertBefore(section, selectedElement);
-                } else {
-                    const section = document.querySelector('section');
-                    section.append(
-                        document.querySelector(`[id="${elementId}"]`)
+            renderedHtmlString.match(elementPattern).map((elementString) => {
+                console.log(`The elementString: ${elementString}`);
+                if (elementString.match(/<section(.*?)<\/section>/gm) != null) {
+                    console.log(`The element contains a section`);
+                    console.log(`This is the elementString: ${elementString}`);
+                    const slicedElementString = elementString.slice(0, 18);
+                    console.log(
+                        `The element string length for ${slicedElementString} is: ${slicedElementString.length}`
                     );
+                    console.log(`The element does not contain a section`);
+                    console.log(
+                        `The element length for element ${slicedElementString} is: ${slicedElementString.length}`
+                    );
+                    const idAttributeArray =
+                        slicedElementString.match(/id=\"(.*?)\"/gm);
+                    console.log(
+                        `The index of id=" is: ${idAttributeArray[0].indexOf(
+                            `id="`
+                        )}`
+                    );
+                    const slicedIdAttributeString = idAttributeArray[0].slice(
+                        4,
+                        idAttributeArray[0].length - 1
+                    );
+                    console.log('sliced id attribute array');
+                    console.log(idAttributeArray);
+                    console.log('slicedIdAttributeArray');
+                    console.log(slicedIdAttributeString);
+                    const elementId = `#${slicedIdAttributeString}`;
+                    console.log('the element id is:');
+                    console.log(elementId);
+                    const section = document.querySelector('section');
+
+                    console.log(`I am console.loggin the section`);
+                    console.log(section);
+
+                    section.appendChild(document.querySelector(elementId));
+                } else {
+                    console.log(`The element does not contain a section`);
+                    console.log(
+                        `The element length for element ${elementString} is: ${elementString.length}`
+                    );
+                    const idAttributeArray =
+                        elementString.match(/id=\"(.*?)\"/gm);
+                    console.log(
+                        `The index of id=" is: ${idAttributeArray[0].indexOf(
+                            `id="`
+                        )}`
+                    );
+                    const slicedIdAttributeString = idAttributeArray[0].slice(
+                        4,
+                        idAttributeArray[0].length - 1
+                    );
+                    console.log('sliced id attribute array');
+                    console.log(idAttributeArray);
+                    console.log('slicedIdAttributeArray');
+                    console.log(slicedIdAttributeString);
+                    const elementId = `${slicedIdAttributeString}`;
+                    console.log('the element id is:');
+                    console.log(elementId);
+                    console.log(
+                        `The type of elementId is: ${typeof elementId}`
+                    );
+
+                    const selectedElement = document.getElementById(elementId);
+                    console.log('The selected element is');
+                    console.log(selectedElement);
+
+                    if (document.querySelector('section') == null) {
+                        const section = document.createElement('section');
+
+                        document
+                            .getElementById(elementId)
+                            .parentNode.insertBefore(
+                                section,
+                                document.getElementById(elementId)
+                            );
+                        console.log(
+                            'Section does not exist and will create it.'
+                        );
+
+                        console.log(
+                            `The type of the section element is: ${typeof document.querySelector(
+                                'section'
+                            )}`
+                        );
+                    } else {
+                        const section = document.querySelector('section');
+
+                        console.log(`I am console.loggin the section`);
+                        console.log(section);
+
+                        section.appendChild(document.getElementById(elementId));
+                    }
                 }
             });
         }

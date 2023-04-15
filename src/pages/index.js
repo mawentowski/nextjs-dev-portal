@@ -7,8 +7,12 @@
 // import MainBody from '../../components/MainBody';
 // import Global from '../../components/layouts/layout';
 import Layout from '../../components/Layout';
+import React from 'react';
 
 export default function Home() {
+    if (typeof document === 'undefined') {
+        React.useLayoutEffect = React.useEffect;
+    }
     return (
         <Layout>
             <div>This is the home page.</div>
