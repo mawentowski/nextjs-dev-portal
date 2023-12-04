@@ -49,13 +49,9 @@ export default function Article({
             document.getElementById('article-content').innerHTML;
         console.log(renderedHtmlString);
 
-        const elementPattern = /<(.*?) id="(.*?)">(.*?)<\/(.*?)>/gm;
+        const elementPattern = /<(.*?) id=" (.*?)">(.*?)<\/(.*?)>/gm;
         if (renderedHtmlString.match(elementPattern)) {
             renderedHtmlString.match(elementPattern).map((elementString) => {
-                console.log(`The sectionCount is:`);
-                console.log(sectionCount);
-                console.log(`The section count is:`);
-                console.log(sectionCount.current);
                 console.log(`The elementString: ${elementString}`);
 
                 console.log(
@@ -93,14 +89,11 @@ export default function Article({
                     sectionCount.current = sectionCount.current + 1;
 
                     section.setAttribute('id', `s_${sectionCount.current}`);
+                    const element = document.getElementById(elementId);
 
                     document
                         .getElementById(elementId)
-                        .parentNode.insertBefore(
-                            section,
-                            document.getElementById(elementId)
-                        );
-                    section.appendChild(document.getElementById(elementId));
+                        .parentNode.insertBefore(section, element);
                 } else if (
                     elementString.match(headingPattern) &&
                     document.querySelector('section') !== null
@@ -111,19 +104,24 @@ export default function Article({
                     sectionCount.current = sectionCount.current + 1;
                     section.setAttribute('id', `s_${sectionCount.current}`);
 
-                    document
-                        .getElementById(elementId)
-                        .parentNode.insertBefore(
-                            section,
-                            document.getElementById(elementId)
-                        );
-                    section.appendChild(document.getElementById(elementId));
+                    // document
+                    //     .getElementById(elementId)
+                    //     .parentNode.insertBefore(
+                    //         section,
+                    //         document.getElementById(elementId)
+                    //     );
                 } else {
                     const section = document.createElement('section');
                     section.innerText =
                         'Scenario -3: The element does not match an element pattern. ';
                     sectionCount.current = sectionCount.current + 1;
                     section.setAttribute('id', `s_${sectionCount.current}`);
+                    // document
+                    //     .getElementById(elementId)
+                    //     .parentNode.insertBefore(
+                    //         section,
+                    //         document.getElementById(elementId)
+                    //     );
                 }
             });
         }
