@@ -42,127 +42,16 @@ export default function Article({
     htmlString,
     mdxSource,
 }) {
-<<<<<<< HEAD
-    const [renderedHtmlString, setRenderedHtmlString] = useState();
-=======
     const sectionCount = useRef(0);
->>>>>>> doesnt-work
 
     useEffect(() => {
         const renderedHtmlString =
             document.getElementById('article-content').innerHTML;
         console.log(renderedHtmlString);
-<<<<<<< HEAD
-        setRenderedHtmlString(renderedHtmlString);
-        const elementPattern = /<(.*?) id="(.*?)">(.*?)<\/(.*?)>/gm;
+
+        const elementPattern = /<(.*?) id=" (.*?)">(.*?)<\/(.*?)>/gm;
         if (renderedHtmlString.match(elementPattern)) {
             renderedHtmlString.match(elementPattern).map((elementString) => {
-                console.log(`The elementString: ${elementString}`);
-                if (elementString.match(/<section(.*?)<\/section>/gm) != null) {
-                    console.log(`The element contains a section`);
-                    console.log(`This is the elementString: ${elementString}`);
-                    const slicedElementString = elementString.slice(0, 18);
-                    console.log(
-                        `The element string length for ${slicedElementString} is: ${slicedElementString.length}`
-                    );
-                    console.log(`The element does not contain a section`);
-                    console.log(
-                        `The element length for element ${slicedElementString} is: ${slicedElementString.length}`
-                    );
-                    const idAttributeArray =
-                        slicedElementString.match(/id=\"(.*?)\"/gm);
-                    console.log(
-                        `The index of id=" is: ${idAttributeArray[0].indexOf(
-                            `id="`
-                        )}`
-                    );
-                    const slicedIdAttributeString = idAttributeArray[0].slice(
-                        4,
-                        idAttributeArray[0].length - 1
-                    );
-                    console.log('sliced id attribute array');
-                    console.log(idAttributeArray);
-                    console.log('slicedIdAttributeArray');
-                    console.log(slicedIdAttributeString);
-                    const elementId = `#${slicedIdAttributeString}`;
-                    console.log('the element id is:');
-                    console.log(elementId);
-                    const section = document.querySelector('section');
-
-                    console.log(`I am console.loggin the section`);
-                    console.log(section);
-
-                    section.appendChild(document.querySelector(elementId));
-                } else {
-                    console.log(`The element does not contain a section`);
-                    console.log(
-                        `The element length for element ${elementString} is: ${elementString.length}`
-                    );
-                    const idAttributeArray =
-                        elementString.match(/id=\"(.*?)\"/gm);
-                    console.log(
-                        `The index of id=" is: ${idAttributeArray[0].indexOf(
-                            `id="`
-                        )}`
-                    );
-                    const slicedIdAttributeString = idAttributeArray[0].slice(
-                        4,
-                        idAttributeArray[0].length - 1
-                    );
-                    console.log('sliced id attribute array');
-                    console.log(idAttributeArray);
-                    console.log('slicedIdAttributeArray');
-                    console.log(slicedIdAttributeString);
-                    const elementId = `${slicedIdAttributeString}`;
-                    console.log('the element id is:');
-                    console.log(elementId);
-                    console.log(
-                        `The type of elementId is: ${typeof elementId}`
-                    );
-
-                    const selectedElement = document.getElementById(elementId);
-                    console.log('The selected element is');
-                    console.log(selectedElement);
-
-                    if (document.querySelector('section') == null) {
-                        const section = document.createElement('section');
-
-                        document
-                            .getElementById(elementId)
-                            .parentNode.insertBefore(
-                                section,
-                                document.getElementById(elementId)
-                            );
-                        console.log(
-                            'Section does not exist and will create it.'
-                        );
-
-                        console.log(
-                            `The type of the section element is: ${typeof document.querySelector(
-                                'section'
-                            )}`
-                        );
-                    } else {
-                        const section = document.querySelector('section');
-
-                        console.log(`I am console.loggin the section`);
-                        console.log(section);
-
-                        section.appendChild(document.getElementById(elementId));
-                    }
-                }
-            });
-        }
-    }, [renderedHtmlString]);
-=======
-
-        const elementPattern = /<(.*?) id="(.*?)">(.*?)<\/(.*?)>/gm;
-        if (renderedHtmlString.match(elementPattern)) {
-            renderedHtmlString.match(elementPattern).map((elementString) => {
-                console.log(`The sectionCount is:`);
-                console.log(sectionCount);
-                console.log(`The section count is:`);
-                console.log(sectionCount.current);
                 console.log(`The elementString: ${elementString}`);
 
                 console.log(
@@ -200,14 +89,11 @@ export default function Article({
                     sectionCount.current = sectionCount.current + 1;
 
                     section.setAttribute('id', `s_${sectionCount.current}`);
+                    const element = document.getElementById(elementId);
 
                     document
                         .getElementById(elementId)
-                        .parentNode.insertBefore(
-                            section,
-                            document.getElementById(elementId)
-                        );
-                    section.appendChild(document.getElementById(elementId));
+                        .parentNode.insertBefore(section, element);
                 } else if (
                     elementString.match(headingPattern) &&
                     document.querySelector('section') !== null
@@ -218,24 +104,28 @@ export default function Article({
                     sectionCount.current = sectionCount.current + 1;
                     section.setAttribute('id', `s_${sectionCount.current}`);
 
-                    document
-                        .getElementById(elementId)
-                        .parentNode.insertBefore(
-                            section,
-                            document.getElementById(elementId)
-                        );
-                    section.appendChild(document.getElementById(elementId));
+                    // document
+                    //     .getElementById(elementId)
+                    //     .parentNode.insertBefore(
+                    //         section,
+                    //         document.getElementById(elementId)
+                    //     );
                 } else {
                     const section = document.createElement('section');
                     section.innerText =
                         'Scenario -3: The element does not match an element pattern. ';
                     sectionCount.current = sectionCount.current + 1;
                     section.setAttribute('id', `s_${sectionCount.current}`);
+                    // document
+                    //     .getElementById(elementId)
+                    //     .parentNode.insertBefore(
+                    //         section,
+                    //         document.getElementById(elementId)
+                    //     );
                 }
             });
         }
     }, []);
->>>>>>> doesnt-work
 
     console.log('######################################');
 

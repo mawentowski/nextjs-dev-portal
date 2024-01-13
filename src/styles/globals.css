@@ -11,6 +11,7 @@ html {
     height: 100%;
     letter-spacing: 0.02rem;
     line-height: 1.75;
+    color: #003366;
 }
 
 body {
@@ -143,6 +144,19 @@ h5 {
 /* ********************************/
 /* BUTTONS */
 /* ********************************/
+
+button.test {
+    background-color: #00c851;
+    padding: 0 4px;
+    margin: 0 2px;
+    color: white;
+    text-transform: uppercase;
+    border-radius: 4px;
+    font-weight: 500;
+    cursor: none;
+    position: relative;
+    top: 8px;
+}
 
 button {
     border-radius: 0.4rem;
